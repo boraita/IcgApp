@@ -6,11 +6,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN apk add --no-cache --virtual .gyp \
-        python \
-        make \
-        g++ \
-    && npm install && \
+RUN npm install && \
     npm rebuild node-sass
 RUN if [[ -z "$STAGE" ]] ; then npm run build ; else npm run build:$STAGE ; fi
 
