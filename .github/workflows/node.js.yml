@@ -30,7 +30,5 @@ jobs:
         run: npm run lint
       - name: Build the Docker image
         run: docker build -t icg-app .
-      - name: Stop Docker Image
-        run: docker stop icg-app || true && docker rm icg-app || true
       - name: Run Docker Image
         run: docker run -d --name icg-app -p 80:80 icg-app
