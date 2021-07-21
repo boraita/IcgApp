@@ -13,6 +13,7 @@ jobs:
   build:
     runs-on: self-hosted
 
+    if: github.event.pull_request.merged == true
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js 14.x
@@ -20,6 +21,8 @@ jobs:
         with:
           node-version: 14.x
           cache: 'npm'
+      - name: Install dependencies CI
+        run: npm ci
       - name: Build the Docker image
         run: docker build -t icg-app .
       - name: Stop Docker Image
