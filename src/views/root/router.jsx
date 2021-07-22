@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
-import {AppBar, Switch, Tab, Tabs, Toolbar} from '@material-ui/core';
+import { AppBar, Switch, Tab, Tabs, Toolbar } from '@material-ui/core';
 
 function a11yProps(index) {
   return {
@@ -25,7 +25,7 @@ export const MainRouter = ({setThemeState}) => {
               <Tab label="Home" {...a11yProps(0)} component={Link} to="/" />
               <Tab label="Help" {...a11yProps(1)} component={Link} to="/example" />
             </Tabs>
-
+            
             <Switch onChange={e => setThemeState(e.target.checked)} aria-label="Theme switch" />
           </Toolbar>
         </AppBar>
@@ -33,7 +33,7 @@ export const MainRouter = ({setThemeState}) => {
           <h1>Welcome React ICG App!!!!</h1>
         </Route>
         <Route path="/example">
-          <h3>Gracias por apoyarnos Danié</h3>
+          <h3>Ejemplo 2</h3>
         </Route>
       </div>
     </Router>
