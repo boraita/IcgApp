@@ -1,5 +1,4 @@
 import React, {Suspense} from 'react';
-import {Button} from '@material-ui/core';
 
 import './App.scss';
 import Home from '../views/root/root';
