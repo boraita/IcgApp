@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/rest-api/node_modules
 /.pnp
 .pnp.js
 
@@ -10,6 +11,7 @@
 
 # production
 /build
+/rest-api/dist
 
 # misc
 .DS_Store
