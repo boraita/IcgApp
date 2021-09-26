@@ -24,6 +24,7 @@ export const MainRouter = ({setThemeState}) => {
             <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
               <Tab label="Home" {...a11yProps(0)} component={Link} to="/" />
               <Tab label="Help" {...a11yProps(1)} component={Link} to="/example" />
+              <Tab label="Help" {...a11yProps(1)} component={Link} to="/poldo" />
             </Tabs>
             
             <Switch onChange={e => setThemeState(e.target.checked)} aria-label="Theme switch" />
@@ -34,6 +35,9 @@ export const MainRouter = ({setThemeState}) => {
         </Route>
         <Route path="/example">
           <h3>Ejemplo 2</h3>
+        </Route>
+        <Route path="/poldo">
+          <h3>Salvando al soldado poldo!!!</h3>
         </Route>
       </div>
     </Router>
