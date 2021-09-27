@@ -1,7 +1,0 @@
-{
-  "defaultSeverity": "error",
-  "extends": ["eslint:recommended", "google"],
-  "jsRules": {},
-  "rules": {},
-  "rulesDirectory": []
-}
