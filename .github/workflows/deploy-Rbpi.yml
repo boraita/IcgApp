@@ -21,6 +21,8 @@ jobs:
         with:
           node-version: 16.x
           cache: 'npm'
+      - name: Clean node-sass
+        run: npm rebuild node-sass
       - name: Install dependencies CI
         run: npm ci
       - name: Build the Docker image
