@@ -18,5 +18,8 @@
     "titleBar.inactiveForeground": "#e7e7e799"
   },
   "peacock.remoteColor": "#151f38",
-  "peacock.color": "#151f38"
+  "peacock.color": "#151f38",
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  }
 }
