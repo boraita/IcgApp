@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install & nom rebuild node-sass
+RUN npm install & npm rebuild node-sass
 RUN if [[ -z "$STAGE" ]] ; then npm run build ; else npm run build:$STAGE ; fi
 
 FROM nginx:1.19-alpine
