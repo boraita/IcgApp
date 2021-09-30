@@ -13,11 +13,11 @@ jobs:
 
     if: github.event.pull_request.merged == true
     steps:
-      # - name: Use Node.js 12.x
-      #   uses: actions/setup-node@v2
-      #   with:
-      #     node-version: 12.x
-      #     cache: "npm"
+       - name: Use Node.js 12.x
+         uses: actions/setup-node@v2
+         with:
+           node-version: 12.18.1
+           cache: "npm"
       - name: Build the Docker image
         run: docker build -t icg-app .
       - name: Stop Docker Image
