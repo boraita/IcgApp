@@ -1,4 +1,4 @@
-FROM node:lts-alpine AS builder
+FROM node:12 AS builder
 
 ARG STAGE=""
 
@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install --production 
+RUN npm ci
 
 RUN if [[ -z "$STAGE" ]] ; then npm run build ; else npm run build:$STAGE ; fi
 
