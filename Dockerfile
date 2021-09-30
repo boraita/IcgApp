@@ -1,12 +1,13 @@
-FROM node:lts-alpine AS builder
+FROM node:12.18.1 AS builder
 
 ARG STAGE=""
+ENV NODE_ENV=production 
 
 WORKDIR /app
 
 COPY . .
 
-RUN npm install --production 
+RUN npm install --production
 
 RUN if [[ -z "$STAGE" ]] ; then npm run build ; else npm run build:$STAGE ; fi
 
