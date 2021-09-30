@@ -1,6 +1,7 @@
 FROM node:12.18.1 AS builder
 
 ARG STAGE=""
+
 ENV NODE_ENV=production 
 
 WORKDIR /app
