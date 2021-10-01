@@ -1,6 +1,6 @@
 FROM node:12.18.1 AS builder
 
-ARG STAGE=""
+# ARG STAGE=""
 
 ENV NODE_ENV=production 
 
@@ -10,7 +10,8 @@ COPY . .
 
 RUN npm install --production
 
-RUN if [[ -z "$STAGE" ]] ; then npm run build ; else npm run build:$STAGE ; fi
+# RUN if [[ -z "$STAGE" ]] ; then npm run build ; else npm run build:$STAGE ; fi
+RUN npm run build
 
 FROM nginx:1.19-alpine
 ENV TZ=Europe/Berlin
