@@ -5,13 +5,12 @@ name: Deployment Rafele-pi
 
 on:
   pull_request:
+    branches: [main]
     types: [closed]
 
 jobs:
   build:
     runs-on: self-hosted
-
-    if: github.event.pull_request.merged == true
     steps:
       - name: Build the Docker image
         run: docker build -t icg-app .
