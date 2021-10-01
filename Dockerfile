@@ -8,7 +8,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install --production
+RUN npm install && npm rebuild node-sass
 
 # RUN if [[ -z "$STAGE" ]] ; then npm run build ; else npm run build:$STAGE ; fi
 RUN npm run build
