@@ -1,7 +1,7 @@
-import {CssBaseline, ThemeProvider} from '@material-ui/core';
-import React, {useState} from 'react';
-import {MainRouter} from './router';
-import {SetTheme} from 'core/style/themeConfig';
+import { CssBaseline, ThemeProvider } from '@material-ui/core';
+import React, { useState } from 'react';
+import { MainRouter } from './router';
+import { SetTheme } from 'core/style/themeConfig';
 
 function Home() {
   const [stateMode, setStateMode] = useState(false);
