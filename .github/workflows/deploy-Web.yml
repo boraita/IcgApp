@@ -1,13 +1,13 @@
 # This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Deployment Rafele-pi
+name: Deployment Front part
 
 on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
+    branches: [web/**]
 
 jobs:
   build:
@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build the Docker image
-        run: docker build -t icg-app .
+        run: docker build -f ./web -t icg-app .
       - name: Stop Docker Image
         run: docker stop icg-app || true && docker rm icg-app || true
       - name: Run Docker Image
