@@ -1,6 +1,6 @@
-FROM node:12 AS builder
+FROM node:lts-alpine AS builder
 
-# ARG STAGE=""
+ARG STAGE=""
 
 ENV NODE_ENV=production 
 
@@ -8,10 +8,9 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install --only=prod
+RUN npm ci
 
-# RUN if [[ -z "$STAGE" ]] ; then npm run build ; else npm run build:$STAGE ; fi
-RUN npm run build
+RUN if [[ -z "$STAGE" ]] ; then npm run build ; else npm run build:$STAGE; fi
 
 FROM nginx:1.19-alpine
 ENV TZ=Europe/Berlin
