@@ -1,4 +1,4 @@
-FROM node:14 AS builder
+FROM node:12 AS builder
 
 # ARG STAGE=""
 
@@ -8,7 +8,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install
+RUN npm install --only=prod
 
 # RUN if [[ -z "$STAGE" ]] ; then npm run build ; else npm run build:$STAGE ; fi
 RUN npm run build
