@@ -4,25 +4,19 @@
 name: Node.js CI
 
 on:
-  pull_request:
+  push:
     branches: [main]
+  pull_request:
+    branches: [api/**]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x]
-
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
-      - run: npm ci
-      - name: Clean node-sass
-        run: npm rebuild node-sass
-      - run: npm run build --if-present
+      - name: Build the Docker image
+        run: docker build -f ./rest -t icg-app-rest .
+      - name: Stop Docker Image
+        run: docker stop icg-app-rest || true && docker rm icg-app-rest || true
+      - name: Run Docker Image
+        run: docker run -d --name icg-app-rest -p 2700:2700 icg-app-rest
