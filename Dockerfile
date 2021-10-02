@@ -8,6 +8,12 @@ WORKDIR /app
 
 COPY . .
 
+RUN apk --no-cache add --virtual native-deps \
+  g++ gcc libgcc libstdc++ linux-headers make python && \
+  npm install --quiet node-gyp -g &&\
+  npm install --quiet && \
+  apk del native-deps
+
 RUN npm ci
 
 RUN if [[ -z "$STAGE" ]] ; then npm run build ; else npm run build:$STAGE; fi
