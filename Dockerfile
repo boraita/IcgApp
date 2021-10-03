@@ -1,4 +1,4 @@
-FROM node:lts-alpine AS builder
+FROM node:14 AS builder
 
 ARG STAGE=""
 
@@ -7,12 +7,6 @@ ENV NODE_ENV=production
 WORKDIR /app
 
 COPY . .
-
-RUN apk --no-cache add --virtual native-deps \
-  g++ gcc libgcc libstdc++ linux-headers make python && \
-  npm install --quiet node-gyp -g &&\
-  npm install --quiet && \
-  apk del native-deps
 
 RUN npm ci
 
