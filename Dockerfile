@@ -8,7 +8,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm ci
+RUN npm install
 
 # RUN if [[ -z "$STAGE" ]] ; then npm run build ; else npm run build:$STAGE; fi
 RUN npm run build
