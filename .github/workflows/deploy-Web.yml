@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build the Docker image
-        run: docker build . -t icg-app-test -f web/Dockerfile
+        run: docker build . -t icg-app -f web/Dockerfile
       - name: Stop Docker Image
         run: docker stop icg-app || true && docker rm icg-app || true
       - name: Run Docker Image
