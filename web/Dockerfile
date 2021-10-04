@@ -6,7 +6,7 @@ ENV NODE_ENV=production
 
 WORKDIR /app
 
-COPY . .
+COPY ./web .
 
 RUN npm install
 
@@ -17,6 +17,6 @@ FROM nginx:1.19-alpine
 ENV TZ=Europe/Berlin
 
 COPY --from=builder /app/build/ /usr/share/nginx/html/
-COPY ./web/nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80/tcp
