@@ -4,8 +4,8 @@
 name: Node.js CI
 
 on:
-  # push:
-  #   branches: [main]
+  push:
+    branches: [main]
   pull_request:
     branches: [api/**]
 
@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build the Docker image
-        run: docker build -f ./rest -t icg-app-rest .
+        run: docker build . -f api/Dockerfile -t icg-app-rest
       - name: Stop Docker Image
         run: docker stop icg-app-rest || true && docker rm icg-app-rest || true
       - name: Run Docker Image
