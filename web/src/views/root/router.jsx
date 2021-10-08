@@ -21,10 +21,9 @@ export const MainRouter = ({setThemeState}) => {
       <div>
         <AppBar position="static">
           <Toolbar>
-            <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+            <Tabs value={value} onChange={handleChange} aria-label="tabs">
               <Tab label="Home" {...a11yProps(0)} component={Link} to="/" />
-              <Tab label="Help" {...a11yProps(1)} component={Link} to="/example" />
-              <Tab label="Help" {...a11yProps(1)} component={Link} to="/poldo" />
+              <Tab label="Help Me" {...a11yProps(1)} component={Link} to="/poldo" />
             </Tabs>
             
             <Switch onChange={e => setThemeState(e.target.checked)} aria-label="Theme switch" />
@@ -32,9 +31,6 @@ export const MainRouter = ({setThemeState}) => {
         </AppBar>
         <Route path="/">
           <h1>Welcome React ICG App!!!!</h1>
-        </Route>
-        <Route path="/example">
-          <h3>Ejemplo 2</h3>
         </Route>
         <Route path="/poldo">
           <h3>Salvando al soldado poldo!!!</h3>
