@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2016",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -14,9 +18,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
+    "checkJs": true,
     "jsx": "react-jsx",
-    "baseUrl": "./src"
+    "baseUrl": "src"
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

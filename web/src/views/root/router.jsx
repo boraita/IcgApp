@@ -1,15 +1,16 @@
-import React from 'react';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import { AppBar, Switch, Tab, Tabs, Toolbar } from '@material-ui/core';
+import React from 'react';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Routes } from './Routes';
 
-function a11yProps(index) {
+const a11yProps = (index) => {
   return {
     id: `simple-tab-${index}`,
     'aria-controls': `simple-tabpanel-${index}`,
   };
-}
+};
 
-export const MainRouter = ({setThemeState}) => {
+export const MainRouter = ({ setThemeState }) => {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (_, newValue) => {
@@ -25,16 +26,10 @@ export const MainRouter = ({setThemeState}) => {
               <Tab label="Home" {...a11yProps(0)} component={Link} to="/" />
               <Tab label="Help Me" {...a11yProps(1)} component={Link} to="/poldo" />
             </Tabs>
-            
             <Switch onChange={e => setThemeState(e.target.checked)} aria-label="Theme switch" />
           </Toolbar>
         </AppBar>
-        <Route path="/">
-          <h1>Welcome React ICG App!!!!</h1>
-        </Route>
-        <Route path="/poldo">
-          <h3>Salvando al soldado poldo!!!</h3>
-        </Route>
+        <Routes />
       </div>
     </Router>
   );
