@@ -5,9 +5,7 @@ name: Deployment Front part
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [web/**]
+    branches: [web/**, main]
 
 jobs:
   build:
