@@ -5,7 +5,7 @@ name: Deploy Back end App
 
 on:
   push:
-    branches: [api/deploy, main]
+    branches: [api/**, main]
 
 jobs:
   build:
