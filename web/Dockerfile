@@ -8,7 +8,7 @@ WORKDIR /app
 
 COPY ./web .
 
-RUN npm i -g yarn
+# RUN npm i -g yarn
 
 RUN yarn install --frozen-lockfile
 
