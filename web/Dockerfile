@@ -8,9 +8,7 @@ WORKDIR /app
 
 COPY ./web .
 
-# RUN npm i -g yarn
-
-RUN yarn install --frozen-lockfile
+RUN yarn install
 
 # RUN if [[ -z "$STAGE" ]] ; then npm run build ; else npm run build:$STAGE; fi
 RUN yarn build
