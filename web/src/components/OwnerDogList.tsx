@@ -1,8 +1,9 @@
+import React from 'react';
 
 export const OwnerDogList = () => {
-    return (
-        <div>
+  return (
+    <div>
             List of dog ownerss
-        </div>
-    )
-}
+    </div>
+  );
+};

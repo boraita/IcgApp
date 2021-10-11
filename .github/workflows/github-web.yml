@@ -28,6 +28,8 @@ jobs:
       - name: install Yarn
         run: npm i -g yarn
       - name: install packages
-        run: yarn install --frozen-lockfile
+        run: yarn install
+      - name: Linting application
+        run: yarn lint
       - name: Building application
         run: yarn build
