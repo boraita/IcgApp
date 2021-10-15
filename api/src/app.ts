@@ -1,11 +1,13 @@
-import express from 'express';
+import { getOwners } from './components/owner/ownerService';
+import { app } from './core/config';
+import { globalConfig } from './core/globalConfig';
 
-const app = express();
 
-app.get('/', (req: any, res: { send: (arg0: string) => void }) => {
-	res.send('Well done!');
+app.get('/v1/owners', (req: any, res: any) => {
+	const owners = getOwners()
+	res.status(200).send(owners);
 });
 
-app.listen(2700, () => {
+app.listen(globalConfig.port, () => {
 	console.log('IcgApp is listening on port 2700!');
 });
