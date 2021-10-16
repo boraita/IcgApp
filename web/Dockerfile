@@ -8,7 +8,7 @@ WORKDIR /app
 
 COPY ./web .
 
-RUN yarn
+RUN yarn install --immutable --immutable-cache
 
 # RUN if [[ -z "$STAGE" ]] ; then npm run build ; else npm run build:$STAGE; fi
 RUN yarn build

@@ -28,7 +28,7 @@ jobs:
       - name: install Yarn
         run: npm i -g yarn
       - name: install packages
-        run: yarn install
+        run: yarn install --immutable --immutable-cache
       - name: Linting application
         run: yarn lint
       - name: Building application
