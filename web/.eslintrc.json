@@ -1,9 +1,12 @@
 {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "node": true,
+        "commonjs": true
     },
     "extends": [
+        "eslint:recommended",
         "plugin:react/recommended",
         "google"
     ],
@@ -44,6 +47,14 @@
             }
         ],
         "no-console": "off",
-        "no-unused-vars": "off"
+        "no-unused-vars": "off",
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ]
     }
 }
