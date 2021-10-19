@@ -1,6 +1,10 @@
 {
   "name": "icg-app",
+<<<<<<< HEAD
   "version": "0.0.0",
+=======
+  "version": "0.0.1",
+>>>>>>> Update to Angular
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -23,7 +27,7 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~12.2.10",
+    "@angular-devkit/build-angular": "^12.2.10",
     "@angular/cli": "~12.2.10",
     "@angular/compiler-cli": "~12.2.0",
     "@types/jasmine": "~3.8.0",
