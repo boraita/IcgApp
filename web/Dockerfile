@@ -2,17 +2,17 @@ FROM trion/ng-cli:latest as builder
 
 ARG STAGE=""
 
-ENV NODE_ENV=production 
-
 WORKDIR /app
 
 COPY ./web .
 
+RUN npm install -g @angular/cli
+
 RUN npm i
 
-RUN npm run build
+# RUN npm run build
 
-# RUN if [[ -z "$STAGE" ]] ; then npm run build ; else npm run build:$STAGE; fi
+RUN if [[ -z "$STAGE" ]] ; then npm run build ; else npm run build:$STAGE; fi
 
 FROM nginx:1.19-alpine
 ENV TZ=Europe/Berlin
