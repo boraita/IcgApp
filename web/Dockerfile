@@ -2,11 +2,11 @@ FROM trion/ng-cli:latest as builder
 
 ARG STAGE=""
 
-ENV NODE_ENV=production 
-
 WORKDIR /app
 
 COPY ./web .
+
+RUN npm install -g @angular/cli
 
 RUN npm i
 
