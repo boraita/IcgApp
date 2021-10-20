@@ -6,6 +6,8 @@ WORKDIR /app
 
 COPY ./web .
 
+RUN npm install -g @angular/cli
+
 RUN npm install
 
 RUN npm run build
