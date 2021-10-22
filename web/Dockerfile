@@ -1,4 +1,4 @@
-FROM node:12 as builder
+FROM trion/ng-cli:latest as builder
 
 ARG STAGE=""
 
@@ -8,7 +8,7 @@ COPY ./web .
 
 RUN npm install -g @angular/cli
 
-RUN npm install
+RUN npm ci
 
 RUN npm run build
 
