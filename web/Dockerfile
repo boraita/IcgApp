@@ -8,7 +8,7 @@ COPY ./web .
 
 RUN npm install -g @angular/cli
 
-RUN npm install
+RUN npm ci
 
 RUN npm run build
 
