@@ -1,4 +1,4 @@
-FROM trion/node:12 as builder
+FROM node:12 as builder
 
 ARG STAGE=""
 
