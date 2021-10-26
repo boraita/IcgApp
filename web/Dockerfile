@@ -1,4 +1,4 @@
-FROM node:14 as builder
+FROM trion/ng-cli:latest as builder
 
 ARG STAGE=""
 
