@@ -6,9 +6,9 @@ WORKDIR /app
 
 COPY ./web .
 
-RUN npm install -g @angular/cli
+# RUN npm install -g @angular/cli
 
-RUN npm install
+RUN npm install --production
 
 RUN npm run build
 
