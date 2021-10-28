@@ -2,12 +2,12 @@
     <mat-icon>more_vert</mat-icon>
 </button>
 <mat-menu #menu="matMenu">
-    <button mat-menu-item>
-        <mat-icon>add</mat-icon>
-        <span>Create</span>
+    <button mat-menu-item [routerLink]="['/schedule']">
+        <mat-icon>task</mat-icon>
+        <span>Tareas</span>
     </button>
-    <button mat-menu-item>
-        <mat-icon>edit</mat-icon>
-        <span>Edit Task</span>
+    <button mat-menu-item [routerLink]="['/report']">
+        <mat-icon>report</mat-icon>
+        <span>Reportes</span>
     </button>
 </mat-menu>
