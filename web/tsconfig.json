@@ -24,6 +24,9 @@
       "@app/*": [
         "app/*"
       ],
+      "@core/*": [
+        "app/core/*"
+      ],
       "@components/*": [
         "app/components/*"
       ],
@@ -33,6 +36,7 @@
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictTemplates": true,
+    "strictPropertyInitialization": false
   }
 }
