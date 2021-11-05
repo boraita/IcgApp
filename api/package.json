@@ -5,7 +5,7 @@
 	"main": "app.js",
 	"scripts": {
 		"start": "ts-node src/app.ts",
-		"start-nodemon": "tsc && nodemon src/app.js localhost 2700",
+		"dev:server": "nodemon --watch './**/*.ts' --exec 'ts-node' src/app.ts",
 		"build": "tsc -p .",
 		"dev": "ts-node src/app.ts"
 	},
