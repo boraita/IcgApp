@@ -19,6 +19,6 @@ function getPath(params: any) {
  */
 export const resolveApiPath = (...params: Array<string | number>) => {
   const urlApi = getPath(params);
-  const fullUrl = "".concat(window.location.hostname, ":", GlobalConfig.apiPort, "/", GlobalConfig.baseApiUrl, urlApi)
+  const fullUrl = GlobalConfig.path.concat(GlobalConfig.baseApiUrl, urlApi)
   return fullUrl;
 };

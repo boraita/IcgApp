@@ -8,14 +8,17 @@ import { MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
-import { RouterModule, Routes } from '@angular/router';
+import { ReportListComponent } from './report-list/report-list.component';
 import { ReportMainComponent } from './report-main/report-main.component';
+import { ReportRoutingModule } from './report-routing.module';
 import { ReportsService } from './reports.service';
 
 @NgModule({
   declarations: [
     ReportMainComponent,
+    ReportListComponent,
   ],
   imports: [
     CommonModule,
@@ -28,8 +31,9 @@ import { ReportsService } from './reports.service';
     MatCardModule,
     MatButtonModule,
     MatInputModule,
+    MatListModule,
     HttpClientModule,
-    RouterModule.forChild([{ path: '', component: ReportMainComponent }] as Routes)
+    ReportRoutingModule
 
   ],
   providers: [
