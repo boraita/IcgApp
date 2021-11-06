@@ -25,11 +25,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - name: install Yarn
-        run: npm i -g yarn
+      - name: install Angular Cli
+        run: npm install -g @angular/cli
       - name: install packages
-        run: yarn install
-      - name: Linting application
-        run: yarn lint
+        run: npm ci
       - name: Building application
-        run: yarn build
+        run: npm run build

@@ -1,0 +1,17 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item [routerLink]="['/schedule']">
+        <mat-icon>task</mat-icon>
+        <span>Tareas</span>
+    </button>
+    <button mat-menu-item [routerLink]="['/report']">
+        <mat-icon>report</mat-icon>
+        <span>Reportes</span>
+    </button>
+    <button mat-menu-item [routerLink]="['/report/list']">
+        <mat-icon>list</mat-icon>
+        <span>Lista de Reportes</span>
+    </button>
+</mat-menu>
