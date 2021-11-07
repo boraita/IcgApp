@@ -1,4 +1,4 @@
-FROM trion/ng-cli:latest as builder
+FROM node:16.13.0-alpine as builder
 
 ARG STAGE=""
 
@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY ./web .
 
-# RUN npm install -g @angular/cli
+RUN npm install -g @angular/cli
 
 RUN npm install --production
 
