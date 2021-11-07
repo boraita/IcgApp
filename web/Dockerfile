@@ -1,4 +1,4 @@
-FROM node:16 as builder
+FROM balenalib/rpi-node as builder
 
 ARG STAGE=""
 
@@ -10,9 +10,9 @@ COPY ./web/tsconfig.* ./
 COPY ./web/nginx.conf ./
 COPY ./web/src ./src
 
-# RUN npm install -g @angular/cli
+RUN npm install -g @angular/cli
 
-RUN npm install --production
+RUN npm ci
 
 RUN npm run build
 
