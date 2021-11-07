@@ -5,7 +5,7 @@ ARG STAGE=""
 WORKDIR /app
 
 COPY ./web/angular.json ./
-COPY ./web/package.* ./
+COPY ./web/package* ./
 COPY ./web/tsconfig.* ./
 COPY ./web/nginx.conf ./
 COPY ./web/src ./src
