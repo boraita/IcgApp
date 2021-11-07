@@ -1,5 +1,4 @@
 FROM node:16.13.0-alpine AS builder
-ENV NODE_ENV build
 WORKDIR /app
 COPY api/package.json ./
 COPY api/tsconfig.* ./
