@@ -10,7 +10,7 @@ COPY ./web/tsconfig.* ./
 COPY ./web/nginx.conf ./
 COPY ./web/src ./src
 
-RUN npm install -g @angular/cli
+# RUN npm install -g @angular/cli
 
 RUN npm ci
 
