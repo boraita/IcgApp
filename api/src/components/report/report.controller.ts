@@ -5,7 +5,7 @@ import { ReportService } from './report.service';
 export class ReportController {
   constructor(private readonly service: ReportService) { }
 
-  @Get('v1/report/all')
+  @Get('v1/reports')
   getReports() {
     return this.service.getReports();
   }
