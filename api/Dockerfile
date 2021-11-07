@@ -5,7 +5,7 @@ COPY api/tsconfig.* ./
 COPY api/yarn.lock ./
 COPY api/src ./src
 RUN npm install -g @nestjs/cli
-RUN yarn --frozen-lockfile
+RUN yarn
 RUN yarn build
 ## this is stage two , where the app actually runs
 FROM node:16-slim
