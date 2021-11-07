@@ -1,18 +1,19 @@
 FROM node:16.13.0-alpine AS builder
+ENV NODE_ENV build
 WORKDIR /app
 COPY api/package.json ./
-COPY api/tsconfig.json ./
+COPY api/tsconfig.* ./
 COPY api/yarn.lock ./
-COPY api/nest-cli.json ./
 COPY api/src ./src
-RUN ls -a
-RUN yarn
+RUN npm install -g @nestjs/cli
+RUN yarn --frozen-lockfile
 RUN yarn build
 ## this is stage two , where the app actually runs
 FROM node:16.13.0-alpine
+ENV NODE_ENV production
+USER node
 WORKDIR /app
-COPY api/package.json ./
-RUN yarn
-COPY --from=builder /app/dist .
+COPY --from=builder /app/node_modules/ ./node_modules
+COPY --from=builder /app/dist/ ./dist
 EXPOSE 2700
-CMD ["yarn","start:prod"]
+CMD ["node", "dist/main.js"]
