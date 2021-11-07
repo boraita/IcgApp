@@ -5,6 +5,7 @@
 /web/node_modules
 /.pnp
 .pnp.js
+/web/.angular
 
 # testing
 web/coverage
