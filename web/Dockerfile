@@ -1,10 +1,8 @@
-FROM node:16-alpine as builder
+FROM node:16 as builder
 
 ARG STAGE=""
 
 WORKDIR /app
-
-RUN apk add --no-cache g++ make python3
 
 COPY ./web .
 
