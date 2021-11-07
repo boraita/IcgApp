@@ -5,6 +5,7 @@ COPY api/package.json ./
 COPY api/tsconfig.* ./
 COPY api/yarn.lock ./
 COPY api/src ./src
+RUN npm --version
 RUN npm install -g @nestjs/cli
 RUN yarn --frozen-lockfile
 RUN yarn build
