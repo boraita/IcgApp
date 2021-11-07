@@ -1,4 +1,4 @@
-FROM node:12-alpine AS builder
+FROM node:16-slim AS builder
 WORKDIR /app
 COPY api/package.json ./
 COPY api/tsconfig.* ./
@@ -8,7 +8,7 @@ RUN npm install -g @nestjs/cli
 RUN yarn --frozen-lockfile
 RUN yarn build
 ## this is stage two , where the app actually runs
-FROM node:12-alpine
+FROM node:16-slim
 ENV NODE_ENV production
 USER node
 WORKDIR /app
