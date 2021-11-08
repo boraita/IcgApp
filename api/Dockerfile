@@ -8,7 +8,7 @@ RUN npm install -g @nestjs/cli
 RUN npm install
 RUN npm run build
 ## this is stage two , where the app actually runs
-FROM node:16-slim
+FROM balenalib/rpi-node
 
 WORKDIR /app
 COPY --from=builder /app/node_modules/ ./node_modules
