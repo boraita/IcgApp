@@ -1,8 +1,7 @@
-FROM node:16-slim AS builder
+FROM balenalib/rpi-node AS builder
 WORKDIR /app
 COPY api/package.json ./
 COPY api/tsconfig* ./
-COPY api/yarn.lock ./
 COPY api/nest-cli.json ./
 COPY api/src ./src
 RUN npm install -g @nestjs/cli
