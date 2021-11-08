@@ -11,6 +11,7 @@ RUN npm run build
 FROM balenalib/rpi-node
 
 WORKDIR /app
+RUN npm install -g ts-node
 COPY --from=builder /app/node_modules/ ./node_modules
 COPY --from=builder /app/dist/ ./dist
 EXPOSE 2700
