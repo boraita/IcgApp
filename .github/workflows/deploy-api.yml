@@ -17,4 +17,4 @@ jobs:
       - name: Stop Docker Image
         run: docker stop icg-app-rest || true && docker rm icg-app-rest || true
       - name: Run Docker Image
-        run: docker run -d --name icg-app-rest -p 2700:2700 icg-app-rest --no-cache
+        run: docker run -d --name icg-app-rest -p 2700:2700 icg-app-rest
