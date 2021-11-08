@@ -1,4 +1,4 @@
-FROM balenalib/rpi-node AS builder
+FROM node:16-slim AS builder
 WORKDIR /app
 COPY api/package.json ./
 COPY api/tsconfig* ./
