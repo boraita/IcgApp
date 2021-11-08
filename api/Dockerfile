@@ -4,7 +4,7 @@ COPY api/package* ./
 COPY api/tsconfig* ./
 COPY api/nest-cli.json ./
 COPY api/src ./src
-RUN npm install && npm cache clean --force
+RUN npm install
 RUN npm run build
 ## this is stage two , where the app actually runs
 FROM node:16-slim
