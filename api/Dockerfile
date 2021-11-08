@@ -12,6 +12,5 @@ FROM node:16-slim
 WORKDIR /app
 COPY --from=builder /app/dist/ ./dist
 COPY --from=builder /app/node_modules/ ./node_modules
-RUN npm cache clean --force
 EXPOSE 2700
 CMD ["sh", "-c", "exec node --max_old_space_size=${AM_MAX_MEMORY_SIZE} dist/main"]
