@@ -37,11 +37,11 @@ jobs:
         run: rm -rf node_modules
       - uses: actions/upload-artifact@v1
         with:
-          name: /
+          name: dist
           path: ./web/nginx.conf
       - uses: actions/upload-artifact@v1
         with:
-          name: /
+          name: dist
           path: ./web/dist
   deploy:
     needs: build #this job depends on build job (run after when the build job completed)
@@ -50,11 +50,11 @@ jobs:
     steps:
       - uses: actions/download-artifact@v1
         with:
-          name: icg-app
+          name: dist
       - name: Upload ftp icg-App
         uses: SamKirkland/FTP-Deploy-Action@4.1.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: "icg-app/dist/"
+          server-dir: "icg-app/"
