@@ -50,7 +50,8 @@ jobs:
       - name: Upload ftp icg-App
         uses: SamKirkland/FTP-Deploy-Action@4.1.0
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
+          server: rafelehouse.ddns.net
+          username: gitactions
           password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
           port: 22
