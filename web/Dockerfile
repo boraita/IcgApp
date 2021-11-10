@@ -1,14 +1,18 @@
-FROM node:16-alpine as builder
+FROM balenalib/raspberry-pi-node:16-buster-run as builder
 
 ARG STAGE=""
 
 WORKDIR /app
 
-COPY ./web .
+COPY ./web/angular.json ./
+COPY ./web/package* ./
+COPY ./web/tsconfig.* ./
+COPY ./web/nginx.conf ./
+COPY ./web/src ./src
 
 RUN npm install -g @angular/cli
 
-RUN npm install --production
+RUN npm ci
 
 RUN npm run build
 

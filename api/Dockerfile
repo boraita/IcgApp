@@ -1,18 +1,16 @@
-FROM node:16-slim AS builder
+FROM balenalib/raspberry-pi-node:16-buster-run  AS builder
 WORKDIR /app
-COPY api/package.json ./
-COPY api/tsconfig.* ./
-COPY api/yarn.lock ./
+COPY api/package* ./
+COPY api/tsconfig* ./
+COPY api/nest-cli.json ./
 COPY api/src ./src
-RUN npm install -g @nestjs/cli
-RUN yarn
-RUN yarn build
+RUN npm install
+RUN npm run build
 ## this is stage two , where the app actually runs
 FROM node:16-slim
-ENV NODE_ENV production
-USER node
+
 WORKDIR /app
-COPY --from=builder /app/node_modules/ ./node_modules
 COPY --from=builder /app/dist/ ./dist
+COPY --from=builder /app/node_modules/ ./node_modules
 EXPOSE 2700
-CMD ["node", "dist/main"]
+CMD ["sh", "-c", "exec node --max_old_space_size=${AM_MAX_MEMORY_SIZE} dist/main"]
