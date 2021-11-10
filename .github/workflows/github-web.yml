@@ -48,10 +48,10 @@ jobs:
         with:
           name: Release
       - name: Upload ftp icg-App
-        uses: sebastianpopp/ftp-action@releases/v2
+        uses: SamKirkland/FTP-Deploy-Action@4.1.0
         with:
-          host: ${{ secrets.FTP_SERVER }}
-          user: ${{ secrets.FTP_USERNAME }}
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          localDir: "."
-          remoteDir: "icg-app/dist"
+          local-dir: "."
+          server-dir: "icg-app/dist"
