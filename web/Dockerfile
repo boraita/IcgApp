@@ -1,11 +1,9 @@
-# FROM balenalib/raspberry-pi-node:16-buster-run as builder
+FROM balenalib/raspberry-pi-node:16-buster-run as builder
 
 # ARG STAGE=""
 
 # WORKDIR /app
 
-# COPY /home/gitactions/icg-app/web/dist ./dist
-# COPY /home/gitactions/icg-app/web/nginx/nginx.conf ./dist
 # COPY ./web/angular.json ./
 # COPY ./web/package* ./
 # COPY ./web/tsconfig.* ./
@@ -23,8 +21,8 @@
 FROM nginx:1.19-alpine
 ENV TZ=Europe/Berlin
 
-COPY /home/gitactions/icg-app/web/dist /usr/share/nginx/html/
-COPY /home/gitactions/icg-app/web/nginx/nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./web/dist /usr/share/nginx/html/
+COPY ./web/nginx.conf /etc/nginx/conf.d/default.conf
 # COPY --from=builder /app/dist /usr/share/nginx/html/
 # COPY --from=builder /app/nginx.conf /etc/nginx/conf.d/default.conf
 
