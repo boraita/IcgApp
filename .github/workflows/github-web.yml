@@ -37,11 +37,11 @@ jobs:
         run: rm -rf node_modules
       - uses: actions/upload-artifact@v1
         with:
-          name: icg-app
+          name: /
           path: ./web/nginx.conf
       - uses: actions/upload-artifact@v1
         with:
-          name: icg-app
+          name: /
           path: ./web/dist
   deploy:
     needs: build #this job depends on build job (run after when the build job completed)
