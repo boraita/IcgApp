@@ -31,7 +31,7 @@ jobs:
         run: npm ci
       - name: Building application
         run: npm run build
-      - name: Upload ftp icgApp
+      - name: Upload ftp icg-App
         uses: genietim/ftp-action@releases/v4
         with:
           host: ${{ secrets.FTP_SERVER }}
