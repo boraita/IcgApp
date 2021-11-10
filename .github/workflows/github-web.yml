@@ -37,8 +37,8 @@ jobs:
         run: rm -rf node_modules
       - uses: actions/upload-artifact@v1
         with:
-          name: Release
-          path: .
+          name: dist
+          path: ./web/dist
   deploy:
     needs: build #this job depends on build job (run after when the build job completed)
     name: Deploy artifacts to ftp
@@ -46,7 +46,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v1
         with:
-          name: Release
+          name: dist
       - name: Upload ftp icg-App
         uses: SamKirkland/FTP-Deploy-Action@4.1.0
         with:
