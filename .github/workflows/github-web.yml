@@ -33,11 +33,27 @@ jobs:
         run: npm ci
       - name: Building application
         run: npm run build
+      - name: Generate artifacts for release
+        run: |
+          mkdir Release
+          cp -r dist/* Release
+      - uses: actions/upload-artifact@v1
+        with:
+          name: Release
+          path: Release
+  deploy:
+    needs: build #this job depends on build job (run after when the build job completed)
+    name: Deploy artifacts to ftp
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v1
+        with:
+          name: Release
       - name: Upload ftp icg-App
         uses: sebastianpopp/ftp-action@releases/v2
         with:
           host: ${{ secrets.FTP_SERVER }}
           user: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          localDir: "dist/*"
+          localDir: "Release"
           remoteDir: "icg-app/dist"
