@@ -53,5 +53,3 @@ jobs:
           server: rafelehouse.ddns.net
           username: gitactions
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          port: 22
