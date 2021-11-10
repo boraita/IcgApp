@@ -4,7 +4,7 @@ ARG STAGE=""
 
 WORKDIR /app
 
-COPY /home/gitactions/icg-app ./
+COPY /home/gitactions/icg-app/web ./
 # COPY ./web/angular.json ./
 # COPY ./web/package* ./
 # COPY ./web/tsconfig.* ./
