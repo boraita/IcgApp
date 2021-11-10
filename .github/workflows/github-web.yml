@@ -36,7 +36,7 @@ jobs:
       - uses: actions/upload-artifact@v1
         with:
           name: Release
-          path: dist
+          path: .
   deploy:
     needs: build #this job depends on build job (run after when the build job completed)
     name: Deploy artifacts to ftp
@@ -51,5 +51,5 @@ jobs:
           host: ${{ secrets.FTP_SERVER }}
           user: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          localDir: "dist"
+          localDir: "."
           remoteDir: "icg-app/dist"
