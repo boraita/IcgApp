@@ -9,6 +9,16 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v1
+        with:
+          name: dist
+      - name: Upload ftp icg-App web
+        uses: SamKirkland/FTP-Deploy-Action@4.1.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: "/home/pi/workspace/actions-runner/icg/IcgApp/IcgApp/web/"
       - name: Build the Docker image
         run: docker build . -t icg-app -f web/Dockerfile
       - name: Stop Docker Image
