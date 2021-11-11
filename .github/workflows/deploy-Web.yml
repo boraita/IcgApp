@@ -16,25 +16,11 @@ jobs:
           workflow: github-web.yml
           workflow_conclusion: success
           name: web-app
-      - name: Print the final result
+      - name: Print copy all files
         shell: bash
         run: |
-          pwd
-      - name: Print pwd
-        shell: bash
-        run: |
-          mkdir dist
-      - name: Copy all file
-        shell: bash
-        run: |
-          cp ./*.* ./dist
-      - name: Print /web/dist
-        shell: bash
-        run: |
-          value=`ls -l /web/dist`
-          echo The result is $value
-      - name: Download Artifact
-        run: gh run download -n web-app
+          mkdir web/dist
+          cp ./*.* ./web/dist
       - name: Build the Docker image
         run: docker build . -t icg-app -f web/Dockerfile
       - name: Stop Docker Image
