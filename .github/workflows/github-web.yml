@@ -33,10 +33,9 @@ jobs:
         run: npm ci
       - name: Building application
         run: npm run build
-      - name: Remove node_modules
-        run: rm -rf node_modules
       - name: Upload build artifact
         uses: actions/upload-artifact@v2
         with:
-          name: dist
-          path: ./
+          name: web-app
+          path: web/dist
+          retention-days: 2
