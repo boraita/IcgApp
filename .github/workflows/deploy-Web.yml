@@ -21,6 +21,15 @@ jobs:
         run: |
           value=`ls -l`
           echo The result is $value
+      - name: Copy all file
+        shell: bash
+        run: |
+          cp . /web/dist
+      - name: Print /web/dist
+        shell: bash
+        run: |
+          value=`ls -l /web/dist`
+          echo The result is $value
       - name: Download Artifact
         run: gh run download -n web-app
       - name: Build the Docker image
