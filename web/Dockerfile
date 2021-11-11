@@ -1,13 +1,14 @@
-# FROM balenalib/raspberry-pi-node:16-buster-run as builder
+FROM node:16-slim as builder
 
 # ARG STAGE=""
 
-# WORKDIR /app
+WORKDIR /app
 
 # COPY ./web/angular.json ./
 # COPY ./web/package* ./
 # COPY ./web/tsconfig.* ./
-# COPY ./web/nginx.conf ./
+COPY ./web/nginx.conf ./
+COPY ./web/dist/ ./dist
 # COPY ./web/src ./src
 
 # RUN npm install -g @angular/cli
@@ -21,7 +22,7 @@
 FROM nginx:1.19-alpine
 ENV TZ=Europe/Berlin
 
-COPY --from=builder ./web/dist/ /usr/share/nginx/html/
-COPY --from=builder ./web/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder ./app/dist/ /usr/share/nginx/html/
+COPY --from=builder ./app/nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80/tcp
