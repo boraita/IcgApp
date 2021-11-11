@@ -24,11 +24,11 @@ jobs:
       - name: Print pwd
         shell: bash
         run: |
-          pwd
+          mkdir dist
       - name: Copy all file
         shell: bash
         run: |
-          cp ./* ./web
+          cp ./* ./dist
       - name: Print /web/dist
         shell: bash
         run: |
