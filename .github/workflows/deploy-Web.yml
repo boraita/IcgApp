@@ -19,8 +19,7 @@ jobs:
       - name: Print the final result
         shell: bash
         run: |
-          value=`ls -l`
-          echo The result is $value
+          pwd
       - name: Print pwd
         shell: bash
         run: |
@@ -28,7 +27,7 @@ jobs:
       - name: Copy all file
         shell: bash
         run: |
-          cp ./* ./dist
+          cp ./*.* ./dist
       - name: Print /web/dist
         shell: bash
         run: |
