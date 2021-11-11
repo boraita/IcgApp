@@ -5,7 +5,7 @@ name: Check GitHub Web
 
 on:
   pull_request:
-    branches: [web/**, main]
+    branches: [main]
   push:
     branches: [web/**, main]
 
