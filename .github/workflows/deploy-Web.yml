@@ -21,10 +21,14 @@ jobs:
         run: |
           value=`ls -l`
           echo The result is $value
+      - name: Print pwd
+        shell: bash
+        run: |
+          pwd
       - name: Copy all file
         shell: bash
         run: |
-          cp ./* /web/dist
+          cp ./* ./web
       - name: Print /web/dist
         shell: bash
         run: |
