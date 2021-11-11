@@ -21,6 +21,8 @@ jobs:
         run: |
           value=`ls -l`
           echo The result is $value
+      - name: Download Artifact
+        run: gh run download -n web-app
       - name: Build the Docker image
         run: docker build . -t icg-app -f web/Dockerfile
       - name: Stop Docker Image
