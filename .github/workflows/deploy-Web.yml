@@ -13,6 +13,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: web-app
+          path: web/dist
       - name: Print the final result
         shell: bash
         run: |
