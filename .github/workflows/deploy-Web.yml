@@ -24,7 +24,7 @@ jobs:
       - name: Copy all file
         shell: bash
         run: |
-          cp . /web/dist
+          cp ./* /web/dist
       - name: Print /web/dist
         shell: bash
         run: |
