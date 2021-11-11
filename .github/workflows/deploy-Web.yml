@@ -9,16 +9,6 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
-      - name: Download dist
-        uses: actions/download-artifact@v2
-        with:
-          name: web-app
-          path: web/dist
-      - name: Print the final result
-        shell: bash
-        run: |
-          value=`ls -l`
-          echo The result is $value
       - name: Build the Docker image
         run: docker build . -t icg-app -f web/Dockerfile
       - name: Stop Docker Image
