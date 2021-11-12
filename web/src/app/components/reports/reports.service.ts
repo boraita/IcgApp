@@ -21,11 +21,5 @@ export class ReportsService {
   getAllAreas(): Observable<Area[]> {
     const path = resolveApiPath(ApiResources.ALL_AREAS);
     return this.httpClient.get(path) as Observable<Area[]>;
-    return of([
-      { value: 0, text: 'Niños' },
-      { value: 1, text: 'Multimedia' },
-      { value: 2, text: 'Jovenes' },
-      { value: 4, text: 'Alabanza' },
-    ]);
   }
 }
