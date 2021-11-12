@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PathResources } from '@app/core/config/path-resources';
+import { NewReportComponent } from './new-report/new-report.component';
 import { ReportListComponent } from './report-list/report-list.component';
-import { ReportMainComponent } from './report-main/report-main.component';
 
 const routes: Routes = [
-  { path: '', component: ReportMainComponent },
+  { path: '', component: NewReportComponent },
   { path: PathResources.LIST, component: ReportListComponent },
-
 ];
 
 @NgModule({

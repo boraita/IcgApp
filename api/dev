@@ -1,0 +1,13 @@
+
+> nest-project@0.0.1 start D:\Workspace\IcgApp\api
+> nest start
+
+[32m[Nest] 18636  - [39m12/11/2021, 17:24:58 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 18636  - [39m12/11/2021, 17:24:58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +28ms[39m
+[32m[Nest] 18636  - [39m12/11/2021, 17:24:58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mReportModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 18636  - [39m12/11/2021, 17:24:58 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAppController {/}:[39m[38;5;3m +7ms[39m
+[32m[Nest] 18636  - [39m12/11/2021, 17:24:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/, GET} route[39m[38;5;3m +2ms[39m
+[32m[Nest] 18636  - [39m12/11/2021, 17:24:58 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mReportController {/}:[39m[38;5;3m +2ms[39m
+[32m[Nest] 18636  - [39m12/11/2021, 17:24:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/v1/reports, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 18636  - [39m12/11/2021, 17:24:58 [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +2ms[39m
+Terminate batch job (Y/N)? Terminate batch job (Y/N)? Terminate batch job (Y/N)? 
