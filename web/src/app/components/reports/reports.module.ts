@@ -10,15 +10,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
+import { NewReportComponent } from './new-report/new-report.component';
 import { ReportListComponent } from './report-list/report-list.component';
-import { ReportMainComponent } from './report-main/report-main.component';
 import { ReportRoutingModule } from './report-routing.module';
 import { ReportsService } from './reports.service';
 
 @NgModule({
   declarations: [
-    ReportMainComponent,
     ReportListComponent,
+    NewReportComponent,
   ],
   imports: [
     CommonModule,
@@ -34,7 +34,6 @@ import { ReportsService } from './reports.service';
     MatListModule,
     HttpClientModule,
     ReportRoutingModule
-
   ],
   providers: [
     ReportsService

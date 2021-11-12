@@ -1,8 +1,8 @@
 name: Deployment Front part
 
 on:
-  push:
-    branches: [web/deploy, main]
+  pull_request:
+    branches: [web-deploy, main]
 
 jobs:
   build:

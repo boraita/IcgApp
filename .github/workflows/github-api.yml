@@ -1,8 +1,8 @@
 name: Check GitHub Api
 
 on:
-  pull_request:
-    branches: [api/**, main]
+  push:
+    branches: [api/**]
 
 jobs:
   build:
