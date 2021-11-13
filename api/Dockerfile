@@ -1,4 +1,4 @@
-FROM node:16-slim  AS builder
+FROM node:16  AS builder
 WORKDIR /app
 COPY api/package* ./
 COPY api/tsconfig* ./
