@@ -3,6 +3,8 @@ name: Deploy Back end App
 on:
   pull_request:
     branches: [api-deploy, main]
+  push:
+    branches: [api-deploy]
 
 jobs:
   build:
