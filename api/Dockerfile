@@ -1,4 +1,4 @@
-FROM node:16-slim AS builder
+FROM node:16-slim  AS builder
 WORKDIR /app
 COPY api/package* ./
 COPY api/tsconfig* ./
@@ -12,6 +12,5 @@ FROM node:16-slim
 WORKDIR /app
 COPY --from=builder /app/dist/ ./dist
 COPY --from=builder /app/node_modules/ ./node_modules
-
 EXPOSE 2700
-CMD ["node", "dist/main"]
+CMD ["sh", "-c", "exec node --max_old_space_size=${AM_MAX_MEMORY_SIZE} dist/main"]
