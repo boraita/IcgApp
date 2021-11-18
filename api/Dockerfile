@@ -1,4 +1,4 @@
-FROM balenalib/raspberry-pi-node:16-buster-run  AS builder
+FROM node:16  AS builder
 WORKDIR /app
 COPY api/package* ./
 COPY api/tsconfig* ./
