@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { AreaService } from './area.service';
-import { Area } from '../../models/area';
+import { Area } from '../../shared/models/area';
 
 @Controller()
 export class AreaController {
