@@ -32,9 +32,3 @@ jobs:
           name: api-app
           path: api/dist
           retention-days: 2
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: api-app-modules
-          path: api/node_modules
-          retention-days: 2

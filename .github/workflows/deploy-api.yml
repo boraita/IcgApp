@@ -19,14 +19,6 @@ jobs:
           workflow_conclusion: success
           name: api-app
           path: ./api/dist
-      - name: Download modules
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          github_token: ${{secrets.TOKEN_ARTIFACTS}}
-          workflow: github-api.yml
-          workflow_conclusion: success
-          name: api-app-modules
-          path: ./api/node_modules
       - name: Build the Docker image
         run: docker build . -f api/Dockerfile -t icg-app-rest
       - name: Stop Docker Image
