@@ -2,7 +2,7 @@ name: Check GitHub Web
 
 on:
   push:
-    branches: [web/**]
+    branches: [web/**, web-deploy, main]
 
 jobs:
   build:
