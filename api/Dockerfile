@@ -4,6 +4,7 @@ COPY api/package* ./
 COPY api/tsconfig* ./
 COPY api/nest-cli.json ./
 COPY api/src ./src
+COPY api/dist ./dist
 RUN npm install
 # RUN npm run build
 ## this is stage two , where the app actually runs
