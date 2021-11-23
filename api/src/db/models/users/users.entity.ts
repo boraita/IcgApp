@@ -23,4 +23,8 @@ export class Users {
 	@Field()
 	@Column({ length: 60 })
 	password: string;
+
+	@Field()
+	@Column()
+	role: number;
 }
