@@ -8,6 +8,7 @@ type Users {
   username: String!
   email: String!
   password: String!
+  role: Float!
 }
 
 type Query {
