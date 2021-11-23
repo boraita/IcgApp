@@ -16,11 +16,7 @@ jobs:
           workflow: github-web.yml
           workflow_conclusion: success
           name: web-app
-      - name: Copy all files web app
-        shell: bash
-        run: |
-          mkdir web/dist
-          cp ./web-app/* ./web/dist
+          path: ./web/dist
       - name: Build the Docker image
         run: docker build . -t icg-app -f web/Dockerfile
       - name: Stop Docker Image
