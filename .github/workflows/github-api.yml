@@ -2,7 +2,7 @@ name: Check GitHub Api
 
 on:
   push:
-    branches: [api/**]
+    branches: [api/**, api-deploy]
 
 jobs:
   build:
@@ -26,3 +26,9 @@ jobs:
         run: npm install
       - name: Building application
         run: npm run build
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: api-app
+          path: api/dist
+          retention-days: 2
