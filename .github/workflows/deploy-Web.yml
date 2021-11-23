@@ -20,7 +20,7 @@ jobs:
         shell: bash
         run: |
           mkdir web/dist
-          cp web-app ./web/dist
+          cp ./web-app/* ./web/dist
       - name: Build the Docker image
         run: docker build . -t icg-app -f web/Dockerfile
       - name: Stop Docker Image
