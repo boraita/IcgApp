@@ -13,4 +13,4 @@ WORKDIR /app
 COPY --from=builder /app/dist/ ./dist
 COPY --from=builder /app/node_modules/ ./node_modules
 EXPOSE 2700
-CMD "node dist/main"
+CMD ["sh", "-c", "exec node dist/main"]
