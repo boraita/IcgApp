@@ -14,7 +14,7 @@ services:
     container_name: api-icg
     image: icg-app-rest:latest
     ports:
-      - "${APP_PORT}:${APP_PORT}"
+     - 2700:2700
     depends_on:
       - postgres
     volumes:

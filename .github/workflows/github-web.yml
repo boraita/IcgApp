@@ -33,4 +33,4 @@ jobs:
         with:
           name: web-app
           path: web/dist
-          retention-days: 2
+          retention-days: 1
