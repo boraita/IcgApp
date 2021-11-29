@@ -12,7 +12,7 @@ services:
 
   api:
     container_name: api-icg
-    image: icg-app-rest
+    image: icg-app-rest:staging
     ports:
      - 2700:2700
     depends_on:
