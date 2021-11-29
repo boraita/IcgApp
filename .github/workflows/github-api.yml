@@ -31,4 +31,4 @@ jobs:
         with:
           name: api-app
           path: api/dist
-          retention-days: 2
+          retention-days: 1
