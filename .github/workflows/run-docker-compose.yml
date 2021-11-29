@@ -9,8 +9,5 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
-      
-      - name: Stopping docker compose
-        run: docker-compose down
       - name: Running docker compose
-        run: docker-compose up
+        run: docker-compose up -d --force-recreate
