@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ReportModule } from './components/report/report.module';
-import { AreaModule } from './components/area/area.module';
+import { ConfigModule } from '@nestjs/config';
+import { DbModule } from './db/db.module';
+import { MainModulesModule } from './modules/mainmodules.module';
 
 @Module({
-	imports: [AreaModule, ReportModule],
+	imports: [MainModulesModule, ConfigModule.forRoot(), DbModule],
 })
 export class AppModule {}

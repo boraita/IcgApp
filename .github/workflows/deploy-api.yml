@@ -11,9 +11,17 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
+      - name: Download build
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          github_token: ${{secrets.TOKEN_ARTIFACTS}}
+          workflow: github-api.yml
+          workflow_conclusion: success
+          name: api-app
+          path: ./api/dist
       - name: Build the Docker image
         run: docker build . -f api/Dockerfile -t icg-app-rest
       - name: Stop Docker Image
         run: docker stop icg-app-rest || true && docker rm icg-app-rest || true
       - name: Run Docker Image
-        run: docker run -d --name icg-app-rest -p 2700:2700 icg-app-rest
+        run: docker run -d --name icg-app-rest -p 2700:2700 -p 5432:5432 icg-app-rest
