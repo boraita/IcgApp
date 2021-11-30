@@ -12,23 +12,24 @@ services:
 
   api:
     container_name: api-icg
-    image: icg-app-rest:0.0.1-SNAPSHOT
+    image: icg-app-rest:latest
     ports:
      - 2700:2700
     depends_on:
       - postgres
     volumes:
-      - .:/app
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
     env_file:
       - docker.env
-    command: node api/dist/main
+    command: node app/dist/main
 
-  # pgadmin:
-  #   container_name: pgadmin
-  #   image: dpage/pgadmin4
-  #   ports:
-  #     - 8080:80
-  #   volumes:
-  #     - ${HOME}/data/pgadmin:/root/.pgadmin
-  #   env_file:
-  #     - docker.env
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    ports:
+      - 8080:80
+    volumes:
+      - ${HOME}/data/pgadmin:/root/.pgadmin
+    env_file:
+      - docker.env
