@@ -10,8 +10,7 @@ RUN npm install
 FROM node:16-alpine
 
 WORKDIR /app
+COPY --from=builder /app/package.* ./
 COPY --from=builder /app/dist/ ./dist
 COPY --from=builder /app/node_modules/ ./node_modules
-EXPOSE 2700
-EXPOSE 5432
-ENTRYPOINT ["sh", "-c", "exec node dist/main"]
+ENTRYPOINT ["npm", "run", "start:prod"]
