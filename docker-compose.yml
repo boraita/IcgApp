@@ -18,10 +18,11 @@ services:
     depends_on:
       - postgres
     volumes:
-      - .:/app
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
     env_file:
       - docker.env
-    command: node api/dist/main
+    command: node app/dist/main
 
   pgadmin:
     container_name: pgadmin
