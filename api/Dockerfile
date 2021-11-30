@@ -7,7 +7,7 @@ COPY api/src ./src
 COPY api/dist ./dist
 RUN npm install
 # RUN npm run build
-FROM node:16-alpine
+FROM node:16
 
 WORKDIR /app
 COPY --from=builder /app/package.* ./
