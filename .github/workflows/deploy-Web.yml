@@ -2,9 +2,9 @@ name: Deployment Front part
 
 on:
   pull_request:
-    branches: [web-deploy, main]
+    branches: [web-deploy]
   push:
-    branches: [web-deploy, main]
+    branches: [web-deploy]
 
 jobs:
   build:
@@ -21,7 +21,7 @@ jobs:
           path: ./web/dist
       - name: Build the Docker image
         run: docker build --no-cache . -t icg-app -f web/Dockerfile
-      - name: Stop Docker Image
-        run: docker stop icg-app || true && docker rm icg-app || true
-      - name: Run Docker Image
-        run: docker run -d --name icg-app -p 80:80 icg-app
+      # - name: Stop Docker Image
+      #   run: docker stop icg-app || true && docker rm icg-app || true
+      # - name: Run Docker Image
+      #   run: docker run -d --name icg-app -p 80:80 icg-app

@@ -1,5 +1,11 @@
 version: "3"
 services:
+  web:
+    container_name: webserver
+    image: icg-app:latest
+    ports:
+    - 80:80
+    - 443:443
     
   postgres:
     container_name: postgres
@@ -12,7 +18,7 @@ services:
       - docker.env
 
   api:
-    container_name: api-icg-rest
+    container_name: backendserver
     image: icg-app-rest:latest
     ports:
      - 2700:2700
@@ -24,13 +30,3 @@ services:
     env_file:
       - docker.env
     command: node app/dist/main
-
-  # pgadmin:
-  #   container_name: pgadmin
-  #   image: dpage/pgadmin4
-  #   ports:
-  #     - 8080:80
-  #   volumes:
-  #     - ${HOME}/data/pgadmin:/root/.pgadmin
-  #   env_file:
-  #     - docker.env
