@@ -10,10 +10,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Update resources
-        uses: shine1594/secrets-to-env-action@master
-        with:
-          secrets: ${{ toJSON(secrets.DEPLOY_VARIABLES) }}
-          secrets_env: all
-          file_name_prod: docker.env
+        run: echo ${{secrets.DEPLOY_VARIABLES}} > docker.env
+      - name: List DEPLOY_VARIABLES
+        run: cat docker.env
       - name: Running docker compose
         run: docker-compose up -d --force-recreate
