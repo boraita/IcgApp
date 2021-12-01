@@ -1,5 +1,6 @@
 version: "3"
 services:
+    
   postgres:
     container_name: postgres
     image: postgres
@@ -11,7 +12,7 @@ services:
       - docker.env
 
   api:
-    container_name: api-icg
+    container_name: api-icg-rest
     image: icg-app-rest:latest
     ports:
      - 2700:2700
