@@ -9,7 +9,11 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
-      - name: Stopping docker compose
-        run: docker-compose down
+      - name: Update resources
+        uses: shine1594/secrets-to-env-action@master
+        with:
+          secrets: ${{ secrets.DEPLOY_VARIABLES }}
+          secrets_env: all
+          file_name_prod: docker.env
       - name: Running docker compose
         run: docker-compose up -d --force-recreate
