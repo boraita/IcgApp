@@ -12,7 +12,7 @@ jobs:
       - name: Update resources
         uses: shine1594/secrets-to-env-action@master
         with:
-          secrets: ${{ secrets.DEPLOY_VARIABLES }}
+          secrets: ${{ toJSON(secrets.DEPLOY_VARIABLES) }}
           secrets_env: all
           file_name_prod: docker.env
       - name: Running docker compose
