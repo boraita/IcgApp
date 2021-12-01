@@ -9,9 +9,17 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
-      - name: Update resources
-        run: echo ${{secrets.DEPLOY_VARIABLES}} > docker.env
-      - name: List DEPLOY_VARIABLES
-        run: cat docker.env
+      - name: print secrets
+        run: |
+            echo $DEPLOY_VARIABLES >> docker.env
+            cat docker.env
+        shell: bash
+        env:
+          DEPLOY_VARIABLES : ${{secrets.DEPLOY_VARIABLES}}
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: DEPLOY_VARIABLES
+          path: docker.env
       - name: Running docker compose
         run: docker-compose up -d --force-recreate
