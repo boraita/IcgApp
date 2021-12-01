@@ -9,10 +9,8 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
-      - name: print secrets
-        run: |
-            echo $DEPLOY_VARIABLES | sed 's/ /\n/g' >> docker.env
-            cat docker.env
+      - name: add secrets
+        run: echo $DEPLOY_VARIABLES | sed 's/ /\n/g' >> docker.env
         shell: bash
         env:
           DEPLOY_VARIABLES : ${{secrets.DEPLOY_VARIABLES}}
