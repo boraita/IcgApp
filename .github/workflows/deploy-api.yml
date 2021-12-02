@@ -1,27 +1,57 @@
-name: Deploy Back end App
+name: Deployment Backend
 
 on:
   pull_request:
     branches: [api-deploy]
-  push:
-    branches: [api-deploy]
 
 jobs:
   build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: "api"
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 16
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+          cache: "npm"
+      - name: install packages
+        run: npm install
+      - name: Building application
+        run: npm run build
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: api-app
+          path: api/dist
+
+  deployment:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
       - name: Download build
-        uses: dawidd6/action-download-artifact@v2
+        uses: actions/upload-artifact@v2
         with:
-          github_token: ${{secrets.TOKEN_ARTIFACTS}}
-          workflow: github-api.yml
-          workflow_conclusion: success
           name: api-app
-          path: ./api/dist
+          path: api/dist
       - name: Build the Docker image
         run: docker build --no-cache . -f api/Dockerfile -t icg-app-rest
       # - name: Stop Docker Image
       #   run: docker stop icg-app-rest || true && docker rm icg-app-rest || true
       # - name: Run Docker Image
       #   run: docker run -d --name icg-app-rest -p 2700:2700 -p 5432:5432 icg-app-rest
+      - name: add secrets to file
+        run: echo $DEPLOY_VARIABLES | sed 's/ /\n/g' >> docker.env
+        shell: bash
+        env:
+          DEPLOY_VARIABLES: ${{secrets.DEPLOY_VARIABLES}}
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: DEPLOY_VARIABLES
+          path: docker.env
+      - name: Running docker compose
+        run: docker-compose up -d --force-recreate
