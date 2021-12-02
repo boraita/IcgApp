@@ -1,9 +1,10 @@
 export class PathResources {
-    static HOME = '';
-    static SCHEDULE = 'schedule';
-    static SIGNIN = 'signin';
-    static LIST = 'list';
+  static LOGIN = 'login';
+  static HOME = 'home';
+  static SCHEDULE = 'schedule';
+  static SIGNIN = 'signin';
+  static LIST = 'list';
 
-    // Report
-    static REPORT = 'report';
+  // Report
+  static REPORT = 'report';
 }
