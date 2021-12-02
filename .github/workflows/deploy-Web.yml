@@ -3,6 +3,8 @@ name: Deployment Front
 on:
   pull_request:
     branches: [web-deploy]
+  push:
+    branches: [web/**]
 
 jobs:
   build:
@@ -39,8 +41,7 @@ jobs:
         uses: dawidd6/action-download-artifact@v2
         with:
           github_token: ${{secrets.TOKEN_ARTIFACTS}}
-          workflow: github-web.yml
-          workflow_conclusion: success
+          workflow: deploy-web.yml
           name: web-app
           path: ./web/dist
       - name: Build the Docker image
