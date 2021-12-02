@@ -1,14 +1,38 @@
-name: Deployment Front part
+name: Deployment Front
 
 on:
   pull_request:
     branches: [web-deploy]
-  push:
-    branches: [web-deploy]
 
 jobs:
   build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: "web"
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+          cache: "npm"
+      - name: install Angular Cli
+        run: npm install -g @angular/cli
+      - name: install packages
+        run: npm ci
+      - name: Building application
+        run: npm run build
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: web-app
+          path: web/dist
+
+  docker-image:
     runs-on: self-hosted
+    needs: [build]
     steps:
       - uses: actions/checkout@v2
       - name: Download artifact
@@ -25,3 +49,15 @@ jobs:
       #   run: docker stop icg-app || true && docker rm icg-app || true
       # - name: Run Docker Image
       #   run: docker run -d --name icg-app -p 80:80 icg-app
+      - name: add secrets to file
+        run: echo $DEPLOY_VARIABLES | sed 's/ /\n/g' >> docker.env
+        shell: bash
+        env:
+          DEPLOY_VARIABLES: ${{secrets.DEPLOY_VARIABLES}}
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: DEPLOY_VARIABLES
+          path: docker.env
+      - name: Running docker compose
+        run: docker-compose up -d --force-recreate

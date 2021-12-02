@@ -1,4 +1,4 @@
-name: Run Docker compose
+name: Run Deployment in Raspberry Pi
 
 on:
   push:
