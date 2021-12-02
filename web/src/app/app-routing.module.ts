@@ -4,21 +4,20 @@ import { PathResources } from './core/config/path-resources';
 
 const routes: Routes = [
   {
-    path: PathResources.HOME,
-    loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule)
+    path: PathResources.LOGIN,
+    loadChildren: () =>
+      import('./public/public.module').then((m) => m.PublicModule),
   },
   {
-    path: PathResources.SCHEDULE,
-    loadChildren: () => import('./components/schedule/schedule.module').then(m => m.ScheduleModule)
+    path: '',
+    loadChildren: () => import('./main/main.module').then((m) => m.MainModule),
   },
-  {
-    path: PathResources.REPORT,
-    loadChildren: () => import('./components/reports/reports.module').then(m => m.ReportsModule)
-  }
+  { path: '', redirectTo: PathResources.HOME, pathMatch: 'full' },
+  { path: '**', redirectTo: PathResources.HOME },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
