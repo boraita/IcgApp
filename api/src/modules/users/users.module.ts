@@ -1,6 +1,6 @@
-import { UsersController } from './users.controller';
+import { UsersDbModule } from '@db/models/users/users.module';
 import { Module } from '@nestjs/common';
-import { UsersDbModule } from '../../db/models/users/users.module';
+import { UsersController } from './users.controller';
 
 @Module({
 	imports: [UsersDbModule],

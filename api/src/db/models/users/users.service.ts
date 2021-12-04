@@ -45,7 +45,7 @@ export class UsersService {
 		updateUserInput.password = bcrypt.hashSync(updateUserInput.password, 8);
 
 		const user = await this.usersRepository.preload({
-			id: +id,
+			id: id,
 			...updateUserInput,
 		});
 
@@ -58,5 +58,8 @@ export class UsersService {
 	public async remove(id: string): Promise<any> {
 		const user = await this.findOneById(id);
 		return this.usersRepository.remove(user);
+	}
+	public async getUserByName(username: string): Promise<Users> {
+		return this.usersRepository.findOne({ username });
 	}
 }
