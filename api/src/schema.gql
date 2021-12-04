@@ -6,9 +6,8 @@ type Users {
   id: ID!
   name: String!
   username: String!
-  email: String!
   password: String!
-  role: Float!
+  roles: Float!
 }
 
 type Query {

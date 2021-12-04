@@ -6,6 +6,26 @@
             "type": "pwa-chrome",
             "url": "http://localhost:4200",
             "webRoot": "${workspaceFolder}"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug Nest Framework",
+            "args": [
+                "${workspaceFolder}/api/src/main.ts"
+            ],
+            "runtimeArgs": [
+                "--nolazy",
+                "-r",
+                "ts-node/register",
+                "-r",
+                "tsconfig-paths/register"
+            ],
+            "sourceMaps": true,
+            "envFile": "${workspaceFolder}/api/.env",
+            "cwd": "${workspaceRoot}/api",
+            "console": "integratedTerminal",
+            "protocol": "inspector"
         }
     ]
 }

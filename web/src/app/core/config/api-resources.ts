@@ -3,4 +3,5 @@ export class ApiResources {
   static SEND_REPORT = '/report';
   static ALL_REPORT = '/reports';
   static ALL_AREAS = '/areas';
+  static LOGIN = '/login';
 }
