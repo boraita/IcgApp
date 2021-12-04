@@ -12,14 +12,16 @@ export class AuthService {
 
 	async validateUser(username: string, pass: string): Promise<boolean> {
 		const user = await this.usersService.getUserByName(username);
-		return await user.validatePassword(pass);
+		return await user?.validatePassword(pass);
 	}
 
-	async generateAccessToken(name: string) {
-		const user = await this.usersService.getUserByName(name);
-		const payload: JWTPayload = { id: user.id };
+	async generateAccessToken(
+		username: string
+	): Promise<{ authorization: string }> {
+		const user = await this.usersService.getUserByName(username);
+		const payload: JWTPayload = { id: user.id, roles: user.roles };
 		return {
-			access_token: this.jwtService.sign(payload),
+			authorization: this.jwtService.sign(payload),
 		};
 	}
 }

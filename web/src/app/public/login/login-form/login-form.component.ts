@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -33,9 +34,11 @@ export class LoginFormComponent {
       const password = this.form.get('password')?.value;
 
       this.loginService.login(username, password).subscribe({
-        next: () => this.router.navigate([PathResources.HOME]),
-        error: () => {
-          console.log('error login');
+        next: () => {
+          this.router.navigate([PathResources.HOME]);
+        },
+        error: (e: HttpErrorResponse) => {
+          console.log('error login:', e.status);
           this.loginInvalid = true;
         },
       });

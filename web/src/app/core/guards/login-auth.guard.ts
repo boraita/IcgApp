@@ -6,7 +6,7 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { getCookieItem } from '../persistence';
+import { getCookieItem, getStorageItem } from '../persistence';
 import { PathResources } from '../config/path-resources';
 import { GlobalConfig } from '../config/global-config';
 
@@ -17,10 +17,12 @@ export class LoginAuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | Observable<boolean> {
-    const isLoggedIn = getCookieItem(GlobalConfig.AUTHORIZATION_HEADER);
+    console.log('Guard: LoginAuthGuard');
+    debugger;
+    const isLoggedIn = getStorageItem(GlobalConfig.AUTHORIZATION_HEADER);
     if (!isLoggedIn) {
       this.router.navigate([PathResources.LOGIN]);
     }
-    return !isLoggedIn;
+    return !!isLoggedIn;
   }
 }
