@@ -8,10 +8,6 @@ export class CreateUserInput {
 	readonly name: string;
 
 	@Field()
-	@IsEmail()
-	readonly email: string;
-
-	@Field()
 	@IsString()
 	@MaxLength(40)
 	readonly username: string;
