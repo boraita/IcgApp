@@ -55,4 +55,4 @@ jobs:
           name: DEPLOY_VARIABLES
           path: docker.env
       - name: Running docker compose
-        run: docker-compose up -d api --force-recreate
+        run: docker-compose up --force-recreate -d api
