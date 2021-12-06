@@ -18,7 +18,6 @@ export class LoginAuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): boolean | Observable<boolean> {
     console.log('Guard: LoginAuthGuard');
-    debugger;
     const isLoggedIn = getStorageItem(GlobalConfig.AUTHORIZATION_HEADER);
     if (!isLoggedIn) {
       this.router.navigate([PathResources.LOGIN]);
