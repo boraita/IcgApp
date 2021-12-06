@@ -23,7 +23,7 @@ export class Users {
 
 	@Field()
 	@Column()
-	roles: number;
+	roles: string;
 
 	async validatePassword(password: string): Promise<boolean> {
 		return await bcrypt.compareSync(password, this.password);
