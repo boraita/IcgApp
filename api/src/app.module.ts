@@ -6,5 +6,6 @@ import { MainModulesModule } from './modules/mainmodules.module';
 
 @Module({
 	imports: [AuthModule, MainModulesModule, ConfigModule.forRoot(), DbModule],
+	exports: [AuthModule],
 })
 export class AppModule {}
