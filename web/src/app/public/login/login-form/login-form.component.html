@@ -1,17 +1,17 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <mat-error *ngIf="loginInvalid">
-        The username and password were not recognized
+        Usuario y password incorrectos
     </mat-error>
     <mat-form-field class="full-width-input">
         <input matInput placeholder="Email" formControlName="username" required>
         <mat-error>
-            Please provide a valid email address
+            Por favor ingrese un email valido
         </mat-error>
     </mat-form-field>
     <mat-form-field class="full-width-input">
         <input matInput type="password" placeholder="Password" formControlName="password" required>
         <mat-error>
-            Please provide a valid password
+            Por favor ingrese un password valido
         </mat-error>
     </mat-form-field>
     <div class="button">
