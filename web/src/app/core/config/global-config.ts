@@ -8,6 +8,5 @@ export class GlobalConfig {
     ':' +
     GlobalConfig.apiPort +
     '/';
-  static baseApiUrl = 'v1';
   static AUTHORIZATION_HEADER = 'Authorization';
 }
