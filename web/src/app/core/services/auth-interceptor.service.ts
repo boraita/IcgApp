@@ -5,8 +5,8 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { getStorageItem } from '../persistence';
 import { Observable } from 'rxjs';
+import { getStorageItem } from '../persistence';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {

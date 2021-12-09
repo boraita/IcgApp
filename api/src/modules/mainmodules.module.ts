@@ -5,7 +5,5 @@ import { UsersModule } from './users/users.module';
 
 @Module({
 	imports: [UsersModule, ReportModule, AreaModule],
-	controllers: [],
-	providers: [],
 })
 export class MainModulesModule {}
