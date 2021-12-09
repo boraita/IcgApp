@@ -1,8 +1,8 @@
+import { Users } from '@db/models/users/users.entity';
 import { UsersService } from '@db/models/users/users.service';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { Users } from '../../db/models/users/users.entity';
 import { JWTPayload } from './jwt-payload';
 
 @Injectable()

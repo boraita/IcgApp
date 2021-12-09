@@ -6,10 +6,12 @@ import { GlobalConfig } from './config/global-config';
 function getPath(params: any) {
   if (params.length === 0) {
     // TODO update when alert component exist
-    alert('wrong arguments to setUrls')
+    alert('wrong arguments to setUrls');
   }
   let url = params.slice(0, 1)[0];
-  params.splice(1).map((url_param: string) => (url = url.replace(/%s/, url_param)));
+  params
+    .splice(1)
+    .map((url_param: string) => (url = url.replace(/%s/, url_param)));
   return url;
 }
 
@@ -19,6 +21,6 @@ function getPath(params: any) {
  */
 export const resolveApiPath = (...params: Array<string | number>) => {
   const urlApi = getPath(params);
-  const fullUrl = GlobalConfig.path.concat(GlobalConfig.baseApiUrl, urlApi)
+  const fullUrl = GlobalConfig.path.concat(urlApi);
   return fullUrl;
 };

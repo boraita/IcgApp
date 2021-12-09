@@ -18,7 +18,10 @@
     "module": "es2020",
     "lib": [
       "es2018",
-      "dom"
+      "es2017",
+      "dom",
+      "esnext",
+      "esnext.asynciterable",
     ],
     "paths": {
       "@app/*": [
@@ -29,6 +32,12 @@
       ],
       "@components/*": [
         "app/components/*"
+      ],
+      "@shared-services/*": [
+        "app/shared/services/*"
+      ],
+      "@shared/*": [
+        "app/shared/*"
       ],
     },
   },
