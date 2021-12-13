@@ -10,25 +10,76 @@ type Users {
   roles: String!
 }
 
+type Reports {
+  id: ID!
+  report_id: Float!
+  report_type: String!
+  report_description: String!
+  report_data: String!
+  report_date: DateTime!
+  report_status: String!
+  report_created_by: String!
+  report_created_date: DateTime!
+  report_updated_date: DateTime!
+  is_deleted: Boolean!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Query {
   users(offset: Int = 0, limit: Int = 25): [Users!]!
   user(id: String!): Users!
+  getReports(offset: Int = 0, limit: Int = 25): [Reports!]!
 }
 
 type Mutation {
   createUser(createUserInput: CreateUserInput!): Users!
   updateUser(updateUserInput: UpdateUserInput!, id: String!): Users!
   removeUser(id: String!): Users!
+  createReport(createReportInput: CreateReportInput!): Reports!
+  updateReport(updateReportInput: UpdateReportInput!, id: String!): Reports!
+  removeReport(id: String!): Reports!
 }
 
 input CreateUserInput {
   name: String!
   username: String!
   password: String!
+  roles: String!
 }
 
 input UpdateUserInput {
   name: String
   username: String
   password: String
+  roles: String
+}
+
+input CreateReportInput {
+  report_id: Float!
+  report_type: String!
+  report_description: String!
+  report_data: String!
+  report_date: DateTime!
+  report_status: String!
+  report_created_by: String!
+  report_created_date: DateTime!
+  report_updated_date: DateTime!
+  is_deleted: Boolean!
+}
+
+input UpdateReportInput {
+  report_id: Float
+  report_type: String
+  report_description: String
+  report_data: String
+  report_date: DateTime
+  report_status: String
+  report_created_by: String
+  report_created_date: DateTime
+  report_updated_date: DateTime
+  is_deleted: Boolean
 }
