@@ -5,42 +5,34 @@ import { ReportType } from './reports.enum';
 @InputType()
 export class CreateReportInput {
 	@Field()
-	@IsNumber()
-	readonly report_id: number;
+	@IsString()
+	readonly type: ReportType;
 
 	@Field()
 	@IsString()
-	readonly report_type: ReportType;
+	readonly description: string;
 
 	@Field()
 	@IsString()
-	readonly report_description: string;
-
-	@Field()
-	@IsString()
-	readonly report_data: string;
+	readonly data: string;
 
 	@Field()
 	@IsDate()
-	readonly report_date: Date;
+	readonly date: Date;
 
 	@Field()
 	@IsString()
-	readonly report_status: string;
+	readonly status: string;
 
 	@Field()
 	@IsString()
-	readonly report_created_by: string;
+	readonly created_by: string;
 
 	@Field()
 	@IsDate()
-	readonly report_created_date: Date;
+	readonly created_date: Date;
 
 	@Field()
 	@IsDate()
-	readonly report_updated_date: Date;
-
-	@Field()
-	@IsBoolean()
-	readonly is_deleted: boolean;
+	readonly updated_date: Date;
 }

@@ -12,16 +12,14 @@ type Users {
 
 type Reports {
   id: ID!
-  report_id: Float!
-  report_type: String!
-  report_description: String!
-  report_data: String!
-  report_date: DateTime!
-  report_status: String!
-  report_created_by: String!
-  report_created_date: DateTime!
-  report_updated_date: DateTime!
-  is_deleted: Boolean!
+  type: String!
+  description: String!
+  data: String!
+  date: DateTime!
+  status: String!
+  created_by: String!
+  created_date: DateTime!
+  updated_date: DateTime!
 }
 
 """
@@ -59,27 +57,23 @@ input UpdateUserInput {
 }
 
 input CreateReportInput {
-  report_id: Float!
-  report_type: String!
-  report_description: String!
-  report_data: String!
-  report_date: DateTime!
-  report_status: String!
-  report_created_by: String!
-  report_created_date: DateTime!
-  report_updated_date: DateTime!
-  is_deleted: Boolean!
+  type: String!
+  description: String!
+  data: String!
+  date: DateTime!
+  status: String!
+  created_by: String!
+  created_date: DateTime!
+  updated_date: DateTime!
 }
 
 input UpdateReportInput {
-  report_id: Float
-  report_type: String
-  report_description: String
-  report_data: String
-  report_date: DateTime
-  report_status: String
-  report_created_by: String
-  report_created_date: DateTime
-  report_updated_date: DateTime
-  is_deleted: Boolean
+  type: String
+  description: String
+  data: String
+  date: DateTime
+  status: String
+  created_by: String
+  created_date: DateTime
+  updated_date: DateTime
 }

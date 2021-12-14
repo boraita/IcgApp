@@ -11,41 +11,33 @@ export class Reports {
 
 	@Field()
 	@Column()
-	report_id: number;
+	type: ReportType;
 
 	@Field()
 	@Column()
-	report_type: ReportType;
+	description: string;
 
 	@Field()
 	@Column()
-	report_description: string;
+	data: string;
 
 	@Field()
 	@Column()
-	report_data: string;
+	date: Date;
 
 	@Field()
 	@Column()
-	report_date: Date;
+	status: string;
 
 	@Field()
 	@Column()
-	report_status: string;
+	created_by: string;
 
 	@Field()
 	@Column()
-	report_created_by: string;
+	created_date: Date;
 
 	@Field()
 	@Column()
-	report_created_date: Date;
-
-	@Field()
-	@Column()
-	report_updated_date: Date;
-
-	@Field()
-	@Column()
-	is_deleted: boolean;
+	updated_date: Date;
 }
