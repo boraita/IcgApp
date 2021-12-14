@@ -4,6 +4,7 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CreateReportInput } from './create-report.dto';
 import { ReportArgs } from './report-args';
 import { Reports } from './reports.entity';
+import { ReportStatus } from './reports.enum';
 import { ReportsService } from './reports.service';
 import { UpdateReportInput } from './update-report';
 
@@ -33,6 +34,6 @@ export class ReportsResolver {
 	}
 	@Mutation(() => Reports)
 	public async removeReport(@Args('id') id: string): Promise<any> {
-		return this.reportService.update(id, { is_deleted: true });
+		return this.reportService.update(id, { status: ReportStatus.DELETED });
 	}
 }

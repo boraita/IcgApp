@@ -5,3 +5,9 @@ export enum ReportType {
 	PRAISE = 'PRAISE',
 	TEENYEARS = 'TEENYEARS',
 }
+
+export enum ReportStatus {
+	DONE = 'DONE',
+	DELETED = 'DELETED',
+	WORKING = 'WORKING',
+}
