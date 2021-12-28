@@ -1,16 +1,21 @@
-<div class="report-list">
-    <div *ngFor="let item of reports$ | async" class="report-card">
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title>area: {{item.area}}</mat-card-title>
-                <mat-card-subtitle>Subtitle</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-                Reporte: {{item.text}}
-            </mat-card-content>
-            <mat-card-footer>
-                Quien reporto: {{item.userId}}
-            </mat-card-footer>
-        </mat-card>
-    </div>
+<div *ngIf="(reports$ | async)?.length == 0; else foundReports" class="empty-report-list">
+    No hay ningún reporte
 </div>
+<ng-template #foundReports>
+    <div class="report-list">
+        <div *ngFor="let item of reports$ | async" class="report-card">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>area: {{item.area}}</mat-card-title>
+                    <mat-card-subtitle>Subtitle</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    Reporte: {{item.text}}
+                </mat-card-content>
+                <mat-card-footer>
+                    Quien reporto: {{item.userId}}
+                </mat-card-footer>
+            </mat-card>
+        </div>
+    </div>
+</ng-template>
