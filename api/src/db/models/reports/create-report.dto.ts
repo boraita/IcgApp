@@ -1,38 +1,41 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { IsDate, IsNumber, IsString, IsBoolean } from 'class-validator';
-import { ReportType } from './reports.enum';
+import { IsArray, IsDate, IsString } from 'class-validator';
+import { CreateUserInput } from '../users/create-user.dto';
+import { CreateReportTypeInput } from './create-report-type.dto';
 
 @InputType()
 export class CreateReportInput {
-	@Field()
-	@IsString()
-	readonly type: ReportType;
+	@Field(() => CreateUserInput)
+	readonly userId: CreateUserInput;
+
+	@Field(() => CreateReportTypeInput)
+	readonly typing: CreateReportTypeInput;
 
 	@Field()
 	@IsString()
 	readonly description: string;
 
-	@Field()
-	@IsString()
-	readonly data: string;
-
-	@Field()
-	@IsDate()
-	readonly date: Date;
+	@Field(() => [CreateUserInput])
+	@IsArray()
+	backupPeople: CreateUserInput[];
 
 	@Field()
 	@IsString()
-	readonly status: string;
+	text: string;
+
+	@Field()
+	@IsDate()
+	date: Date;
 
 	@Field()
 	@IsString()
-	readonly created_by: string;
+	status: string;
 
 	@Field()
 	@IsDate()
-	readonly created_date: Date;
+	created_date: Date;
 
 	@Field()
 	@IsDate()
-	readonly updated_date: Date;
+	updated_date: Date;
 }

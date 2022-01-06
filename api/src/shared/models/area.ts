@@ -1,4 +1,6 @@
 export interface Area {
-	value: number;
-	text: string;
+	id: number;
+	name: string;
+	description?: string;
+	node?: string;
 }

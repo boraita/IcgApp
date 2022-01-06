@@ -1,6 +1,16 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import { ReportType } from './reports.enum';
+import {
+	Column,
+	CreateDateColumn,
+	Entity,
+	JoinColumn,
+	JoinTable,
+	ManyToMany,
+	OneToOne,
+	PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Users } from '../users/users.entity';
+import { ReportsType } from './report-type.entity';
 
 @Entity()
 @ObjectType()
@@ -9,17 +19,28 @@ export class Reports {
 	@PrimaryGeneratedColumn()
 	id: string;
 
+	@Field(() => Users)
+	@OneToOne(() => Users)
+	@JoinColumn()
+	createdBy: Users;
+
 	@Field()
-	@Column()
-	type: ReportType;
+	@OneToOne(() => ReportsType)
+	@JoinColumn()
+	typing: ReportsType;
 
 	@Field()
 	@Column()
 	description: string;
 
+	@Field(() => [Users], { nullable: true })
+	@ManyToMany(() => Users, (users) => users.backupreportPeople)
+	@JoinTable()
+	backupPeople: Users[] | null;
+
 	@Field()
 	@Column()
-	data: string;
+	text: string;
 
 	@Field()
 	@Column()
@@ -30,11 +51,7 @@ export class Reports {
 	status: string;
 
 	@Field()
-	@Column()
-	created_by: string;
-
-	@Field()
-	@Column()
+	@CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
 	created_date: Date;
 
 	@Field()
