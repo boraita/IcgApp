@@ -4,12 +4,23 @@ export class ReportQueries {
   static reportsInfo = gql`
     {
       getReports {
-        id
-        type
         description
-        data
+        createdBy {
+          name
+          roles
+        }
+        backupPeople {
+          name
+          username
+          id
+        }
+        typing {
+          type
+        }
+        text
         date
-        created_by
+        status
+        created_date
       }
     }
   `;

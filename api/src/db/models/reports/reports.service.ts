@@ -18,6 +18,7 @@ export class ReportsService {
 		return this.reportsRepository.find({
 			skip: offset,
 			take: limit,
+			relations: ['typing', 'createdBy', 'backupPeople'],
 		});
 	}
 

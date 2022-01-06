@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ApolloQueryResult, DocumentNode } from '@apollo/client/core';
+import { ApolloQueryResult } from '@apollo/client/core';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 
