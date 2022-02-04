@@ -11,7 +11,7 @@ export class ReportsType {
 	id: string;
 
 	@Field()
-	@Column()
+	@Column({ type: 'enum', enum: ReportType, nullable: true })
 	type: ReportType;
 
 	@Field()
@@ -20,4 +20,6 @@ export class ReportsType {
 
 	@OneToOne(() => Reports, (report) => report.typing)
 	report: Reports;
+
+	typing: any;
 }

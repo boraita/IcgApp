@@ -6,6 +6,7 @@ import { UpdateUserInput } from './update-user';
 import { UsersArgs } from './user-args';
 import { Users } from './users.entity';
 import { UsersService } from './users.service';
+import { CurrentUser } from './user.decorator';
 
 @Resolver()
 export class UsersResolver {
@@ -44,5 +45,11 @@ export class UsersResolver {
 	@Mutation(() => Users)
 	public async removeUser(@Args('id') id: string): Promise<any> {
 		return this.usersService.remove(id);
+	}
+
+	@Query(() => Users)
+	@UseGuards(GqlAuthGuard)
+	whoami(@CurrentUser() user: Users) {
+		return this.usersService.getUserByName(user.username);
 	}
 }

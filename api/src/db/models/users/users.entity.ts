@@ -4,7 +4,7 @@ import {
 	Column,
 	Entity,
 	ManyToMany,
-	OneToOne,
+	OneToMany,
 	PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Reports } from '../reports/reports.entity';
@@ -32,7 +32,7 @@ export class Users {
 	@Column()
 	roles: string;
 
-	@OneToOne(() => Reports, (report) => report.createdBy)
+	@OneToMany(() => Reports, (report) => report.createdBy)
 	userReport: Reports;
 
 	@Field(() => [Reports], { nullable: true })

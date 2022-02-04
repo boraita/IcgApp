@@ -1,3 +1,5 @@
+import { registerEnumType } from '@nestjs/graphql';
+
 export enum ReportType {
 	ALL = 'ALL',
 	KIDS = 'KIDS',
@@ -11,3 +13,6 @@ export enum ReportStatus {
 	DELETED = 'DELETED',
 	WORKING = 'WORKING',
 }
+
+registerEnumType(ReportType, { name: 'ReportType' });
+registerEnumType(ReportStatus, { name: 'ReportStatus' });

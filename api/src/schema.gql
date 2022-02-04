@@ -38,7 +38,8 @@ type Users {
 type Query {
   users(offset: Int = 0, limit: Int = 25): [Users!]!
   user(id: String!): Users!
-  getReports(offset: Int = 0, limit: Int = 25): [Reports!]!
+  whoami: Users!
+  getReports(offset: Int = 0, limit: Int = 25, createdBy: Int = -1): [Reports!]!
 }
 
 type Mutation {
@@ -65,30 +66,18 @@ input UpdateUserInput {
 }
 
 input CreateReportInput {
-  userId: CreateUserInput!
-  typing: CreateReportTypeInput!
   description: String!
-  backupPeople: [CreateUserInput!]!
+  idsBackupPeople: [String!]
   text: String!
   date: DateTime!
   status: String!
-  created_date: DateTime!
-  updated_date: DateTime!
-}
-
-input CreateReportTypeInput {
-  type: String!
-  description: String!
 }
 
 input UpdateReportInput {
-  userId: CreateUserInput
-  typing: CreateReportTypeInput
   description: String
-  backupPeople: [CreateUserInput!]
+  idsBackupPeople: [String!]
   text: String
   date: DateTime
   status: String
-  created_date: DateTime
-  updated_date: DateTime
+  updated_date: DateTime!
 }

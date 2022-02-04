@@ -5,7 +5,7 @@ import { ReportType } from './reports.enum';
 @InputType()
 export class CreateReportTypeInput {
 	@Field()
-	@Column()
+	@Column({ type: 'enum', enum: ReportType, nullable: true })
 	type: ReportType;
 
 	@Field()

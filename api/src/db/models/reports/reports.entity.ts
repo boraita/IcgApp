@@ -6,6 +6,7 @@ import {
 	JoinColumn,
 	JoinTable,
 	ManyToMany,
+	ManyToOne,
 	OneToOne,
 	PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -20,7 +21,7 @@ export class Reports {
 	id: string;
 
 	@Field(() => Users)
-	@OneToOne(() => Users)
+	@ManyToOne(() => Users, (user) => user.userReport)
 	@JoinColumn()
 	createdBy: Users;
 
@@ -31,7 +32,7 @@ export class Reports {
 
 	@Field()
 	@Column()
-	description: string;
+	description: String;
 
 	@Field(() => [Users], { nullable: true })
 	@ManyToMany(() => Users, (users) => users.backupreportPeople)
@@ -55,6 +56,6 @@ export class Reports {
 	created_date: Date;
 
 	@Field()
-	@Column()
+	@CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
 	updated_date: Date;
 }
