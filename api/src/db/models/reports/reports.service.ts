@@ -1,8 +1,8 @@
+import { Users } from '@db/models/users/users.entity';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Role } from '@shared/enums/roles';
 import { Repository } from 'typeorm';
-import { Role } from '../../../shared/models/roles';
-import { Users } from '../users/users.entity';
 import { CreateReportInput } from './create-report.dto';
 import { ReportArgs } from './report-args';
 import { Reports } from './reports.entity';
