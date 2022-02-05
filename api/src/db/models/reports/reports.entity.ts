@@ -1,6 +1,17 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import { ReportType } from './reports.enum';
+import {
+	Column,
+	CreateDateColumn,
+	Entity,
+	JoinColumn,
+	JoinTable,
+	ManyToMany,
+	ManyToOne,
+	OneToOne,
+	PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Users } from '../users/users.entity';
+import { ReportsType } from './report-type.entity';
 
 @Entity()
 @ObjectType()
@@ -9,17 +20,28 @@ export class Reports {
 	@PrimaryGeneratedColumn()
 	id: string;
 
+	@Field(() => Users)
+	@ManyToOne(() => Users, (user) => user.userReport)
+	@JoinColumn()
+	createdBy: Users;
+
 	@Field()
-	@Column()
-	type: ReportType;
+	@OneToOne(() => ReportsType)
+	@JoinColumn()
+	typing: ReportsType;
 
 	@Field()
 	@Column()
-	description: string;
+	description: String;
+
+	@Field(() => [Users], { nullable: true })
+	@ManyToMany(() => Users, (users) => users.backupreportPeople)
+	@JoinTable()
+	backupPeople: Users[] | null;
 
 	@Field()
 	@Column()
-	data: string;
+	text: string;
 
 	@Field()
 	@Column()
@@ -30,14 +52,10 @@ export class Reports {
 	status: string;
 
 	@Field()
-	@Column()
-	created_by: string;
-
-	@Field()
-	@Column()
+	@CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
 	created_date: Date;
 
 	@Field()
-	@Column()
+	@CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
 	updated_date: Date;
 }

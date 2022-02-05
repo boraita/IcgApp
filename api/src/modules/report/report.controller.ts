@@ -10,10 +10,10 @@ export class ReportController {
 	@UseGuards(JwtAuthGuard)
 	@Get('v1/reports')
 	getReports() {
-		return this.service.findAll({
-			offset: 0,
-			limit: 50,
-			area: ReportType.ALL,
-		} as ReportArgs);
+		// return this.service.findAll({
+		// 	offset: 0,
+		// 	limit: 50,
+		// 	area: ReportType.ALL,
+		// } as ReportArgs);
 	}
 }

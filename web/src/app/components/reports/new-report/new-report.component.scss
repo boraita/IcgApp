@@ -1,5 +1,17 @@
 .report-overview {
   display: flex;
-  // flex-wrap: wrap;
   flex-direction: column;
+  .report-fields {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+  }
+  .report-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 }

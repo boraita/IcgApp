@@ -1,38 +1,30 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { IsDate, IsNumber, IsString, IsBoolean } from 'class-validator';
-import { ReportType } from './reports.enum';
+import { IsArray, IsDate, IsString } from 'class-validator';
+import { Users } from '../users/users.entity';
 
 @InputType()
 export class CreateReportInput {
 	@Field()
 	@IsString()
-	readonly type: ReportType;
+	description: String;
+
+	@Field(() => [String], { nullable: true })
+	@IsArray()
+	idsBackupPeople: string[] | null;
+
+	backupPeople: Users[] | null;
 
 	@Field()
 	@IsString()
-	readonly description: string;
-
-	@Field()
-	@IsString()
-	readonly data: string;
+	text: string;
 
 	@Field()
 	@IsDate()
-	readonly date: Date;
+	date: Date;
 
 	@Field()
 	@IsString()
-	readonly status: string;
+	status: string;
 
-	@Field()
-	@IsString()
-	readonly created_by: string;
-
-	@Field()
-	@IsDate()
-	readonly created_date: Date;
-
-	@Field()
-	@IsDate()
-	readonly updated_date: Date;
+	createdBy: Users;
 }

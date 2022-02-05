@@ -2,10 +2,10 @@
     "configurations": [
         {
             "name": "Launch Chrome",
+            "type": "chrome",
             "request": "launch",
-            "type": "pwa-chrome",
-            "url": "http://localhost:4200",
-            "webRoot": "${workspaceFolder}"
+            "url": "http://localhost:4200/#",
+            "webRoot": "${workspaceFolder}/web"
         },
         {
             "type": "node",
