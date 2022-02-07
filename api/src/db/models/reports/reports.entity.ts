@@ -7,11 +7,10 @@ import {
 	JoinTable,
 	ManyToMany,
 	ManyToOne,
-	OneToOne,
 	PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Users } from '../users/users.entity';
-import { ReportsType } from './report-type.entity';
+import { Area } from '@db/models/users/enums/areas.enum';
 
 @Entity()
 @ObjectType()
@@ -25,10 +24,9 @@ export class Reports {
 	@JoinColumn()
 	createdBy: Users;
 
-	@Field()
-	@OneToOne(() => ReportsType)
-	@JoinColumn()
-	typing: ReportsType;
+	@Field(() => Area)
+	@Column({ type: 'enum', enum: Area })
+	type: Area;
 
 	@Field()
 	@Column()

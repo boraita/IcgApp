@@ -8,6 +8,8 @@ import {
 	PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Reports } from '../reports/reports.entity';
+import { Area } from './enums/areas.enum';
+import { Role } from './enums/roles.enum';
 
 @Entity()
 @ObjectType()
@@ -28,9 +30,13 @@ export class Users {
 	@Column({ length: 60 })
 	password: string;
 
-	@Field()
-	@Column()
-	roles: string;
+	@Field(() => Role)
+	@Column({ type: 'enum', enum: Role, nullable: true })
+	roles: Role;
+
+	@Field(() => Area, { nullable: true })
+	@Column({ type: 'enum', enum: Area, nullable: true })
+	managerArea: Area;
 
 	@OneToMany(() => Reports, (report) => report.createdBy)
 	userReport: Reports;

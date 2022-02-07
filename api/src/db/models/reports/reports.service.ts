@@ -1,8 +1,8 @@
 import { Users } from '@db/models/users/users.entity';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Role } from '@shared/enums/roles';
 import { Repository } from 'typeorm';
+import { Role } from '../users/enums/roles.enum';
 import { CreateReportInput } from './create-report.dto';
 import { ReportArgs } from './report-args';
 import { Reports } from './reports.entity';
@@ -24,13 +24,21 @@ export class ReportsService {
 		let parameters = {
 			skip: offset,
 			take: limit,
-			relations: ['typing', 'createdBy', 'backupPeople'],
+			relations: ['createdBy', 'backupPeople'],
 		};
 		switch (user.roles) {
+			case Role.Colaborator:
+				parameters = {
+					...parameters,
+					...{
+						where: [{ createdBy: user }, { type: user.managerArea }],
+					},
+				};
+				break;
 			case Role.User:
 				parameters = {
 					...parameters,
-					...{ where: { createdBy: +user.id } },
+					...{ where: { createdBy: user } },
 				};
 				break;
 		}
