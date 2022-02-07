@@ -1,13 +1,9 @@
-export enum ReportType {
-	ALL = 'ALL',
-	KIDS = 'KIDS',
-	MULTIMEDIA = 'MULTIMEDIA',
-	PRAISE = 'PRAISE',
-	TEENYEARS = 'TEENYEARS',
-}
+import { registerEnumType } from '@nestjs/graphql';
 
 export enum ReportStatus {
 	DONE = 'DONE',
 	DELETED = 'DELETED',
 	WORKING = 'WORKING',
 }
+
+registerEnumType(ReportStatus, { name: 'ReportStatus' });

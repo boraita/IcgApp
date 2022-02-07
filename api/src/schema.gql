@@ -2,24 +2,24 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Users {
-  id: ID!
-  name: String!
-  username: String!
-  password: String!
-  roles: String!
-}
-
 type Reports {
   id: ID!
-  type: String!
+  createdBy: Users!
+  type: UserArea!
   description: String!
-  data: String!
+  backupPeople: [Users!]
+  text: String!
   date: DateTime!
   status: String!
-  created_by: String!
   created_date: DateTime!
   updated_date: DateTime!
+}
+
+enum UserArea {
+  Kids
+  Multimedia
+  Youngs
+  Prise
 }
 
 """
@@ -27,10 +27,27 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type Users {
+  id: ID!
+  name: String!
+  username: String!
+  password: String!
+  roles: UserRole!
+  managerArea: UserArea
+  backupreportPeople: [Reports!]
+}
+
+enum UserRole {
+  Admin
+  User
+  Colaborator
+}
+
 type Query {
   users(offset: Int = 0, limit: Int = 25): [Users!]!
   user(id: String!): Users!
-  getReports(offset: Int = 0, limit: Int = 25): [Reports!]!
+  whoami: Users!
+  getReports(offset: Int = 0, limit: Int = 25, createdBy: Int = -1): [Reports!]!
 }
 
 type Mutation {
@@ -57,23 +74,20 @@ input UpdateUserInput {
 }
 
 input CreateReportInput {
-  type: String!
   description: String!
-  data: String!
+  idsBackupPeople: [String!]
+  text: String!
   date: DateTime!
   status: String!
-  created_by: String!
-  created_date: DateTime!
-  updated_date: DateTime!
+  type: String!
 }
 
 input UpdateReportInput {
-  type: String
   description: String
-  data: String
+  idsBackupPeople: [String!]
+  text: String
   date: DateTime
   status: String
-  created_by: String
-  created_date: DateTime
-  updated_date: DateTime
+  type: String
+  updated_date: DateTime!
 }

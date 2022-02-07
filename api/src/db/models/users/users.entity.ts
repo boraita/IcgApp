@@ -1,6 +1,15 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import * as bcrypt from 'bcrypt';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+	Column,
+	Entity,
+	ManyToMany,
+	OneToMany,
+	PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Reports } from '../reports/reports.entity';
+import { Area } from './enums/areas.enum';
+import { Role } from './enums/roles.enum';
 
 @Entity()
 @ObjectType()
@@ -21,9 +30,20 @@ export class Users {
 	@Column({ length: 60 })
 	password: string;
 
-	@Field()
-	@Column()
-	roles: string;
+	@Field(() => Role)
+	@Column({ type: 'enum', enum: Role, nullable: true })
+	roles: Role;
+
+	@Field(() => Area, { nullable: true })
+	@Column({ type: 'enum', enum: Area, nullable: true })
+	managerArea: Area;
+
+	@OneToMany(() => Reports, (report) => report.createdBy)
+	userReport: Reports;
+
+	@Field(() => [Reports], { nullable: true })
+	@ManyToMany(() => Reports, (report) => report.backupPeople)
+	backupreportPeople: [Reports];
 
 	async validatePassword(password: string): Promise<boolean> {
 		return await bcrypt.compareSync(password, this.password);

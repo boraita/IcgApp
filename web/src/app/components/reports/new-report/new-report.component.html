@@ -4,19 +4,59 @@
     </mat-card-header>
     <mat-card-content>
         <form [formGroup]="reportForm" class="report-overview">
-            <mat-form-field appearance="fill">
-                <mat-label>Area</mat-label>
-                <mat-select placeholder="Selecciona un área" formControlName="area">
-                    <mat-option value="" selected></mat-option>
-                    <mat-option *ngFor="let area of areas$ | async" [value]="area.value">
-                        {{area.text}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field appearance="fill">
-                <mat-label>Reporte</mat-label>
-                <textarea matInput formControlName="text" rows="20"></textarea>
-            </mat-form-field>
+            <div class="report-fields">
+                <div>
+                    <mat-form-field>
+                        <mat-label>Tipo de reporte</mat-label>
+                        <mat-select placeholder="Selecciona un tipo de reporte" formControlName="area">
+                            <mat-option value="" selected></mat-option>
+                            <mat-option *ngFor="let area of areas$ | async" [value]="area">
+                                {{area.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="standard">
+                        <mat-label>Persona/s de refuerzo</mat-label>
+                        <mat-select placeholder="Selecciona un tipo de reporte" formControlName="backup">
+                            <mat-option value="" selected></mat-option>
+                            <mat-option *ngFor="let person of backupPeople$ | async" [value]="person.id">
+                                {{person.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field appearance="standard">
+                        <mat-label>Tema principal</mat-label>
+                        <input matInput placeholder="Ej. Limpieza, desarrollo del area" formControlName="topic">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width" appearance="fill">
+                        <mat-label>Dia del reporte</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="date">
+                        <mat-datepicker-toggle matSuffix [for]="picker">
+                            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <button mat-raised-button color="primary" (click)="openDialog()">Puntos a seguir</button>
+                </div>
+            </div>
+            <div class="report-text">
+                <div>
+                    Reporte de actitudes y comportamientos por niño (de forma resumida y concreta, especificar
+                    cosas que requieran atención inmediata).
+                </div>
+                <mat-form-field appearance="fill">
+                    <mat-label>Reporte</mat-label>
+                    <textarea matInput formControlName="text" rows="20"></textarea>
+                </mat-form-field>
+            </div>
         </form>
     </mat-card-content>
     <mat-card-actions align="start">

@@ -1,3 +1,13 @@
+import { User } from '../../../shared/models/user';
+import { ReportType } from './report-type';
 export interface Report {
-    userId: string, text: string, area: number
+  id: number;
+  createdBy: User;
+  typing: ReportType;
+  backup: User[];
+  description: string;
+  status: string;
+  date: Date;
+  createdDate: Date;
+  text: string;
 }

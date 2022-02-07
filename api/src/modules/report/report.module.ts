@@ -1,9 +1,8 @@
 import { ReportsDbModule } from '@db/models/reports/reports.module';
+import { UsersDbModule } from '@db/models/users/users.module';
 import { Module } from '@nestjs/common';
-import { ReportController } from './report.controller';
 
 @Module({
-	imports: [ReportsDbModule],
-	controllers: [ReportController],
+	imports: [ReportsDbModule, UsersDbModule],
 })
 export class ReportModule {}
