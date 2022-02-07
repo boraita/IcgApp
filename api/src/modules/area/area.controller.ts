@@ -1,5 +1,5 @@
+import { Area } from '@db/models/users/enums/areas.enum';
 import { Controller, Get } from '@nestjs/common';
-import { Area } from '@shared/enums/area';
 
 @Controller()
 export class AreaController {

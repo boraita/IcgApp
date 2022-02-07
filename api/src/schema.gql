@@ -2,16 +2,10 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type ReportsType {
-  id: ID!
-  type: String!
-  description: String!
-}
-
 type Reports {
   id: ID!
   createdBy: Users!
-  typing: ReportsType!
+  type: UserArea!
   description: String!
   backupPeople: [Users!]
   text: String!
@@ -19,6 +13,13 @@ type Reports {
   status: String!
   created_date: DateTime!
   updated_date: DateTime!
+}
+
+enum UserArea {
+  Kids
+  Multimedia
+  Youngs
+  Prise
 }
 
 """
@@ -31,8 +32,15 @@ type Users {
   name: String!
   username: String!
   password: String!
-  roles: String!
+  roles: UserRole!
+  managerArea: UserArea
   backupreportPeople: [Reports!]
+}
+
+enum UserRole {
+  Admin
+  User
+  Colaborator
 }
 
 type Query {
@@ -71,6 +79,7 @@ input CreateReportInput {
   text: String!
   date: DateTime!
   status: String!
+  type: String!
 }
 
 input UpdateReportInput {
@@ -79,5 +88,6 @@ input UpdateReportInput {
   text: String
   date: DateTime
   status: String
+  type: String
   updated_date: DateTime!
 }

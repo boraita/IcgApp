@@ -1,7 +1,6 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { Column, PrimaryGeneratedColumn, Entity, OneToOne } from 'typeorm';
-import { ReportType } from './reports.enum';
-import { Reports } from './reports.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Area } from '../users/enums/areas.enum';
 
 @Entity()
 @ObjectType()
@@ -11,15 +10,12 @@ export class ReportsType {
 	id: string;
 
 	@Field()
-	@Column({ type: 'enum', enum: ReportType, nullable: true })
-	type: ReportType;
+	@Column({ type: 'enum', enum: Area, nullable: true })
+	type: Area;
 
 	@Field()
 	@Column()
 	description: string;
-
-	@OneToOne(() => Reports, (report) => report.typing)
-	report: Reports;
 
 	typing: any;
 }

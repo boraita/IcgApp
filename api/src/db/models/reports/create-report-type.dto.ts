@@ -1,12 +1,12 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { Column } from 'typeorm';
-import { ReportType } from './reports.enum';
+import { Area } from '../users/enums/areas.enum';
 
 @InputType()
 export class CreateReportTypeInput {
 	@Field()
-	@Column({ type: 'enum', enum: ReportType, nullable: true })
-	type: ReportType;
+	@Column({ type: 'enum', enum: Area, nullable: true })
+	type: Area;
 
 	@Field()
 	@Column()
