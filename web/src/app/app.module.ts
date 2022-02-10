@@ -1,14 +1,15 @@
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { InMemoryCache } from '@apollo/client/core';
 import { ApiResources } from '@core/config/api-resources';
 import { resolveApiPath } from '@core/resolvePath';
 import { APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { AuthInterceptor } from './core/services/auth-interceptor.service';
 
 function createApollo(httpLink: HttpLink) {
@@ -24,6 +25,7 @@ function createApollo(httpLink: HttpLink) {
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    FlexLayoutModule,
   ],
   providers: [
     {

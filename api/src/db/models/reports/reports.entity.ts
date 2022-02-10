@@ -11,6 +11,7 @@ import {
 } from 'typeorm';
 import { Users } from '../users/users.entity';
 import { Area } from '@db/models/users/enums/areas.enum';
+import { ReportStatus } from './enums/reports-status.enum';
 
 @Entity()
 @ObjectType()
@@ -33,7 +34,7 @@ export class Reports {
 	description: String;
 
 	@Field(() => [Users], { nullable: true })
-	@ManyToMany(() => Users, (users) => users.backupreportPeople)
+	@ManyToMany(() => Users, (users) => users.backupReportPeople)
 	@JoinTable()
 	backupPeople: Users[] | null;
 
@@ -46,8 +47,8 @@ export class Reports {
 	date: Date;
 
 	@Field()
-	@Column()
-	status: string;
+	@Column({ type: 'enum', enum: ReportStatus, default: ReportStatus.working })
+	status: ReportStatus;
 
 	@Field()
 	@CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })

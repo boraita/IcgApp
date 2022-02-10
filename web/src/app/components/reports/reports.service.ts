@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GraphqlService } from '@app/core/services/graphql.service';
 import { Area } from '@app/shared/models/area';
+import { Report } from '@shared/models/report';
 import { ApiResources } from '@core/config/api-resources';
 import { resolveApiPath } from '@core/resolvePath';
-import { map, Observable, pipe } from 'rxjs';
-import { Report } from './models/report';
+import { map, Observable } from 'rxjs';
 import { ReportQueries } from './report-queries';
 
 @Injectable()
@@ -16,8 +16,9 @@ export class ReportsService {
   ) {}
 
   sendReport(body: Report) {
-    const path = resolveApiPath(ApiResources.SEND_REPORT);
-    return this.httpClient.post(path, body);
+    return this.graphService
+      .mutateGraphql(ReportQueries.createReport, { report: body })
+      .pipe(map((result: any) => result?.data));
   }
   getAllReport(): Observable<Report[]> {
     return this.graphService

@@ -6,7 +6,7 @@ import { Role } from '../users/enums/roles.enum';
 import { CreateReportInput } from './create-report.dto';
 import { ReportArgs } from './report-args';
 import { Reports } from './reports.entity';
-import { ReportStatus } from './reports.enum';
+import { ReportStatus } from './enums/reports-status.enum';
 import { UpdateReportInput } from './update-report';
 
 @Injectable()
@@ -27,11 +27,11 @@ export class ReportsService {
 			relations: ['createdBy', 'backupPeople'],
 		};
 		switch (user.roles) {
-			case Role.Colaborator:
+			case Role.Collaborator:
 				parameters = {
 					...parameters,
 					...{
-						where: [{ createdBy: user }, { type: user.managerArea }],
+						where: [{ createdBy: user }, { type: user.collaboratorArea }],
 					},
 				};
 				break;
@@ -56,7 +56,7 @@ export class ReportsService {
 		createReportInput = {
 			...createReportInput,
 			createdBy: user,
-			status: ReportStatus.DONE,
+			status: ReportStatus.done,
 		};
 		return this.reportsRepository.save(createReportInput);
 	}

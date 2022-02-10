@@ -2,6 +2,7 @@ import { Field, InputType } from '@nestjs/graphql';
 import { IsArray, IsDate, IsString } from 'class-validator';
 import { Users } from '../users/users.entity';
 import { Area } from '@db/models/users/enums/areas.enum';
+import { ReportStatus } from './enums/reports-status.enum';
 
 @InputType()
 export class CreateReportInput {
@@ -11,7 +12,7 @@ export class CreateReportInput {
 
 	@Field(() => [String], { nullable: true })
 	@IsArray()
-	idsBackupPeople: string[] | null;
+	idsBackupPeople: string[];
 
 	backupPeople: Users[] | null;
 
@@ -25,7 +26,7 @@ export class CreateReportInput {
 
 	@Field()
 	@IsString()
-	status: string;
+	status: ReportStatus;
 
 	@Field()
 	@IsString()

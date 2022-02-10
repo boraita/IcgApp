@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Area } from '@app/shared/models/area';
+import { ReportType } from '@app/shared/enums/report-type.enum';
+import { ReportStatus } from '@shared/enums/report-status.enum';
+import { UserService } from '@shared/services/user.service';
 import { Observable } from 'rxjs';
 import { RecomendedPointsDialogComponent } from '../recomended-points/recomended-points-dialog.component';
 import { ReportsService } from '../reports.service';
-import { UserService } from '../../../shared/services/user.service';
 
 @Component({
   selector: 'app-new-report',
@@ -14,8 +15,8 @@ import { UserService } from '../../../shared/services/user.service';
 })
 export class NewReportComponent implements OnInit {
   reportForm!: FormGroup;
-  areaSelected!: string;
-  areas$!: Observable<Area[]>;
+  topicSelected!: ReportType;
+  types!: ReportType[];
   // TODO Hacer llamada para las personas de backup
   backupPeople$!: Observable<any[]>;
   // TODO Hacer la llamada al servicio para obtener los puntos recomendados
@@ -35,14 +36,14 @@ export class NewReportComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.reportForm = this.formBuilder.group({
-      area: [null, [Validators.required]],
-      backup: [[], [Validators.required]],
-      topic: [null, [Validators.required]],
-      files: [[], [Validators.required]],
+      type: [ReportType.Kids, [Validators.required]],
+      idsBackupPeople: [[]],
+      description: [null, [Validators.required]],
       date: [new Date(), [Validators.required]],
       text: [null, Validators.required],
+      status: [ReportStatus.done, Validators.required],
     });
-    this.areas$ = this.reportService.getAllAreas();
+    this.types = Object.values(ReportType);
     this.backupPeople$ = this.userService.getAllUsers();
   }
 

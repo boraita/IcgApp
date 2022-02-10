@@ -33,14 +33,14 @@ type Users {
   username: String!
   password: String!
   roles: UserRole!
-  managerArea: UserArea
-  backupreportPeople: [Reports!]
+  collaboratorArea: UserArea
+  backupReportPeople: [Reports!]
 }
 
 enum UserRole {
   Admin
   User
-  Colaborator
+  Collaborator
 }
 
 type Query {

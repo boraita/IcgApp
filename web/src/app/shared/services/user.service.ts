@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ReportQueries } from '@app/components/reports/report-queries';
+import { map } from 'rxjs';
 import { GraphqlService } from '../../core/services/graphql.service';
 import { UserQueries } from './user-queries';
-import { map } from 'rxjs';
 
 @Injectable()
 export class UserService {

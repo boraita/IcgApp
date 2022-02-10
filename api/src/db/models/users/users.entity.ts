@@ -36,14 +36,14 @@ export class Users {
 
 	@Field(() => Area, { nullable: true })
 	@Column({ type: 'enum', enum: Area, nullable: true })
-	managerArea: Area;
+	collaboratorArea: Area;
 
 	@OneToMany(() => Reports, (report) => report.createdBy)
 	userReport: Reports;
 
 	@Field(() => [Reports], { nullable: true })
 	@ManyToMany(() => Reports, (report) => report.backupPeople)
-	backupreportPeople: [Reports];
+	backupReportPeople: [Reports];
 
 	async validatePassword(password: string): Promise<boolean> {
 		return await bcrypt.compareSync(password, this.password);

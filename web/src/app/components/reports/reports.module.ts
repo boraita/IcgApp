@@ -2,7 +2,11 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
+import {
+  MatNativeDateModule,
+  MatOptionModule,
+  MAT_DATE_LOCALE,
+} from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -41,6 +45,10 @@ import { UserService } from '../../shared/services/user.service';
     MatDatepickerModule,
     MatNativeDateModule,
   ],
-  providers: [ReportsService, UserService],
+  providers: [
+    ReportsService,
+    UserService,
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
+  ],
 })
 export class ReportsModule {}

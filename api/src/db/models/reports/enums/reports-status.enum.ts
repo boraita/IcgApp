@@ -1,9 +1,9 @@
 import { registerEnumType } from '@nestjs/graphql';
 
 export enum ReportStatus {
-	DONE = 'DONE',
-	DELETED = 'DELETED',
-	WORKING = 'WORKING',
+	done = 'Done',
+	deleted = 'Deleted',
+	working = 'Working',
 }
 
 registerEnumType(ReportStatus, { name: 'ReportStatus' });

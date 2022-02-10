@@ -6,13 +6,17 @@ import { Users } from '../users/users.entity';
 import { CreateReportInput } from './create-report.dto';
 import { ReportArgs } from './report-args';
 import { Reports } from './reports.entity';
-import { ReportStatus } from './reports.enum';
+import { ReportStatus } from './enums/reports-status.enum';
 import { ReportsService } from './reports.service';
 import { UpdateReportInput } from './update-report';
+import { UsersService } from '../users/users.service';
 
 @Resolver()
 export class ReportsResolver {
-	constructor(private readonly reportService: ReportsService) {}
+	constructor(
+		private readonly reportService: ReportsService,
+		private readonly userService: UsersService
+	) {}
 	@Query(() => [Reports])
 	@UseGuards(GqlAuthGuard)
 	public async getReports(
@@ -28,6 +32,10 @@ export class ReportsResolver {
 		@Args('createReportInput') createReportInput: CreateReportInput,
 		@CurrentUser() user: Users
 	): Promise<Reports> {
+		const backupPeople: Users[] = await this.userService.findAllById(
+			createReportInput.idsBackupPeople
+		);
+		createReportInput = { ...createReportInput, backupPeople };
 		return await this.reportService.create(createReportInput, user);
 	}
 
@@ -48,7 +56,7 @@ export class ReportsResolver {
 	): Promise<any> {
 		return this.reportService.update(
 			id,
-			{ status: ReportStatus.DELETED },
+			{ status: ReportStatus.deleted },
 			user
 		);
 	}
