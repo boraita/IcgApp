@@ -19,3 +19,4 @@ web/build
 
 # misc
 .DS_Store
+docker.env

@@ -1,12 +1,22 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+import * as bcrypt from 'bcrypt';
+import {
+	Column,
+	Entity,
+	ManyToMany,
+	OneToMany,
+	PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Reports } from '../reports/reports.entity';
+import { Area } from './enums/areas.enum';
+import { Role } from './enums/roles.enum';
 
 @Entity()
 @ObjectType()
 export class Users {
 	@Field(() => ID)
 	@PrimaryGeneratedColumn()
-	id: number;
+	id: string;
 
 	@Field()
 	@Column()
@@ -17,14 +27,25 @@ export class Users {
 	username: string;
 
 	@Field()
-	@Column()
-	email: string;
-
-	@Field()
 	@Column({ length: 60 })
 	password: string;
 
-	@Field()
-	@Column()
-	role: number;
+	@Field(() => Role)
+	@Column({ type: 'enum', enum: Role, nullable: true })
+	roles: Role;
+
+	@Field(() => Area, { nullable: true })
+	@Column({ type: 'enum', enum: Area, nullable: true })
+	collaboratorArea: Area;
+
+	@OneToMany(() => Reports, (report) => report.createdBy)
+	userReport: Reports;
+
+	@Field(() => [Reports], { nullable: true })
+	@ManyToMany(() => Reports, (report) => report.backupPeople)
+	backupReportPeople: [Reports];
+
+	async validatePassword(password: string): Promise<boolean> {
+		return await bcrypt.compareSync(password, this.password);
+	}
 }

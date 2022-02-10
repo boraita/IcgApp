@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { CreateUserInput } from './create-user.dto';
 import { UpdateUserInput } from './update-user';
 import { UsersArgs } from './user-args';
@@ -20,6 +20,13 @@ export class UsersService {
 			skip: offset,
 			take: limit,
 		});
+	}
+
+	public async findAllById(ids: string[]): Promise<Users[]> {
+		const users = await this.usersRepository.find({
+			where: { id: In(ids) },
+		});
+		return users;
 	}
 
 	public async findOneById(id: string): Promise<Users> {
@@ -45,7 +52,7 @@ export class UsersService {
 		updateUserInput.password = bcrypt.hashSync(updateUserInput.password, 8);
 
 		const user = await this.usersRepository.preload({
-			id: +id,
+			id: id,
 			...updateUserInput,
 		});
 
@@ -58,5 +65,8 @@ export class UsersService {
 	public async remove(id: string): Promise<any> {
 		const user = await this.findOneById(id);
 		return this.usersRepository.remove(user);
+	}
+	public async getUserByName(username: string): Promise<Users> {
+		return this.usersRepository.findOne({ username });
 	}
 }

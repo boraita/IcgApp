@@ -5,8 +5,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from '../shared/shared.module';
+import { LoggedUserGuard } from '@core/guards/logged-user.guard';
+import { SharedModule } from '@shared/shared.module';
 import { LoginFormComponent } from './login/login-form/login-form.component';
+import { LoginService } from './login/login.service';
 import { LoginComponent } from './login/login/login.component';
 
 @NgModule({
@@ -22,8 +24,10 @@ import { LoginComponent } from './login/login/login.component';
       {
         path: '',
         component: LoginComponent,
+        canActivate: [LoggedUserGuard],
       },
     ]),
   ],
+  providers: [LoginService],
 })
 export class PublicModule {}

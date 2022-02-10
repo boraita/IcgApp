@@ -14,21 +14,32 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
+    "allowJs": true,
+    "checkJs": false,
     "target": "es2017",
     "module": "es2020",
     "lib": [
       "es2018",
-      "dom"
+      "es2017",
+      "dom",
+      "esnext",
+      "esnext.asynciterable",
     ],
     "paths": {
-      "@app/*": [
-        "app/*"
-      ],
       "@core/*": [
         "app/core/*"
       ],
       "@components/*": [
         "app/components/*"
+      ],
+      "@shared-services/*": [
+        "app/shared/services/*"
+      ],
+      "@shared/*": [
+        "app/shared/*"
+      ],
+      "@app/*": [
+        "app/*"
       ],
     },
   },

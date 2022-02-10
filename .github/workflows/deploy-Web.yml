@@ -1,27 +1,60 @@
-name: Deployment Front part
+name: Deployment Front
 
 on:
   pull_request:
     branches: [web-deploy]
-  push:
-    branches: [web-deploy]
 
 jobs:
   build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: "web"
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 16
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+          cache: "npm"
+      - name: install Angular Cli
+        run: npm install -g @angular/cli
+      - name: install packages
+        run: npm ci
+      - name: Building application
+        run: npm run build
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: web-app
+          path: web/dist
+
+  deployment:
     runs-on: self-hosted
+    needs: [build]
     steps:
       - uses: actions/checkout@v2
       - name: Download artifact
-        uses: dawidd6/action-download-artifact@v2
+        uses: actions/download-artifact@master
         with:
-          github_token: ${{secrets.TOKEN_ARTIFACTS}}
-          workflow: github-web.yml
-          workflow_conclusion: success
           name: web-app
-          path: ./web/dist
+          path: web/dist
       - name: Build the Docker image
         run: docker build --no-cache . -t icg-app -f web/Dockerfile
       # - name: Stop Docker Image
       #   run: docker stop icg-app || true && docker rm icg-app || true
       # - name: Run Docker Image
       #   run: docker run -d --name icg-app -p 80:80 icg-app
+      - name: add secrets to file
+        run: echo $DEPLOY_VARIABLES | sed 's/ /\n/g' >> docker.env
+        shell: bash
+        env:
+          DEPLOY_VARIABLES: ${{secrets.DEPLOY_VARIABLES}}
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: DEPLOY_VARIABLES
+          path: docker.env
+      - name: Running docker compose
+        run: docker-compose up --force-recreate -d web

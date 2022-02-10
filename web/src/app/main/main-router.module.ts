@@ -27,6 +27,8 @@ const routes: Routes = [
             (m) => m.ReportsModule
           ),
       },
+      { path: '', redirectTo: PathResources.LOGIN, pathMatch: 'full' },
+      { path: '**', redirectTo: PathResources.LOGIN },
     ],
   },
 ];
