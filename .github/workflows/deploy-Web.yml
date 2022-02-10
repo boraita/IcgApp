@@ -46,7 +46,7 @@ jobs:
       #   run: docker stop icg-app || true && docker rm icg-app || true
       # - name: Run Docker Image
       #   run: docker run -d --name icg-app -p 80:80 icg-app
-      - name: add secrets to file
+      - name: add secrets into file
         run: echo $DEPLOY_VARIABLES | sed 's/ /\n/g' >> docker.env
         shell: bash
         env:
