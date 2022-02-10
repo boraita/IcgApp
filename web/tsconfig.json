@@ -26,9 +26,6 @@
       "esnext.asynciterable",
     ],
     "paths": {
-      "@app/*": [
-        "app/*"
-      ],
       "@core/*": [
         "app/core/*"
       ],
@@ -40,6 +37,9 @@
       ],
       "@shared/*": [
         "app/shared/*"
+      ],
+      "@app/*": [
+        "app/*"
       ],
     },
   },

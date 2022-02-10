@@ -1,5 +1,6 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
+import { Role } from './enums/roles.enum';
 
 @InputType()
 export class CreateUserInput {
@@ -21,5 +22,5 @@ export class CreateUserInput {
 	@Field()
 	@IsNotEmpty()
 	@IsString()
-	roles: string;
+	roles: Role;
 }
