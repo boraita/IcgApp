@@ -3,13 +3,13 @@ import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { CurrentUser } from '../users/user.decorator';
 import { Users } from '../users/users.entity';
+import { UsersService } from '../users/users.service';
 import { CreateReportInput } from './create-report.dto';
+import { ReportStatus } from './enums/reports-status.enum';
 import { ReportArgs } from './report-args';
 import { Reports } from './reports.entity';
-import { ReportStatus } from './enums/reports-status.enum';
 import { ReportsService } from './reports.service';
 import { UpdateReportInput } from './update-report';
-import { UsersService } from '../users/users.service';
 
 @Resolver()
 export class ReportsResolver {
@@ -24,6 +24,15 @@ export class ReportsResolver {
 		@CurrentUser() user: Users
 	): Promise<Reports[]> {
 		return await this.reportService.findAll(reportArgs, user);
+	}
+
+	@Query(() => Reports)
+	@UseGuards(GqlAuthGuard)
+	public async getReport(
+		@Args('id') id: string,
+		@CurrentUser() user: Users
+	): Promise<Reports> {
+		return await this.reportService.findOne(id, user);
 	}
 
 	@Mutation(() => Reports)

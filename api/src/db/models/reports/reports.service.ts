@@ -45,8 +45,23 @@ export class ReportsService {
 		return this.reportsRepository.find(parameters);
 	}
 
-	public async findOne(id: number): Promise<Reports> {
-		return await this.reportsRepository.findOne(id);
+	public async findOne(id: string, user: Users): Promise<Reports> {
+		const report = await this.reportsRepository.findOne(id, {
+			relations: ['createdBy', 'backupPeople'],
+		});
+		if (!report) {
+			throw new NotFoundException(`Report #${id} not found`);
+		} else if (
+			report.createdBy === user ||
+			user.roles === Role.Admin ||
+			(user.roles === Role.Collaborator &&
+				user.collaboratorArea === report.type &&
+				report.status !== ReportStatus.deleted)
+		) {
+			return report;
+		} else {
+			throw new Error('You are not allowed to update this report');
+		}
 	}
 
 	public async create(

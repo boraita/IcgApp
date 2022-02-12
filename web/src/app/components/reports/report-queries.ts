@@ -4,6 +4,29 @@ export class ReportQueries {
   static reportsInfo = gql`
     {
       getReports {
+        id
+        createdBy {
+          name
+        }
+        date
+        type
+        description
+      }
+    }
+  `;
+
+  static createReport = gql`
+    mutation createReport($report: CreateReportInput!) {
+      createReport(createReportInput: $report) {
+        status
+        type
+      }
+    }
+  `;
+
+  static getReport = gql`
+    query getReport($id: String!) {
+      getReport(id: $id) {
         createdBy {
           name
         }
@@ -15,15 +38,7 @@ export class ReportQueries {
         status
         created_date
         type
-      }
-    }
-  `;
-
-  static createReport = gql`
-    mutation createReport($report: CreateReportInput!) {
-      createReport(createReportInput: $report) {
-        status
-        type
+        description
       }
     }
   `;

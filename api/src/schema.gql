@@ -48,6 +48,7 @@ type Query {
   user(id: String!): Users!
   whoami: Users!
   getReports(offset: Int = 0, limit: Int = 25, createdBy: Int = -1): [Reports!]!
+  getReport(id: String!): Reports!
 }
 
 type Mutation {

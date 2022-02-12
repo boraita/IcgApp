@@ -7,6 +7,7 @@ import { UserService } from '@shared/services/user.service';
 import { Observable } from 'rxjs';
 import { RecomendedPointsDialogComponent } from '../recomended-points/recomended-points-dialog.component';
 import { ReportsService } from '../reports.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-report',
@@ -32,7 +33,8 @@ export class NewReportComponent implements OnInit {
     private formBuilder: FormBuilder,
     private reportService: ReportsService,
     private dialog: MatDialog,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
   ngOnInit(): void {
     this.reportForm = this.formBuilder.group({
@@ -48,7 +50,10 @@ export class NewReportComponent implements OnInit {
   }
 
   onSubmit() {
-    this.reportService.sendReport(this.reportForm.value).subscribe();
+    this.reportService.sendReport(this.reportForm.value).subscribe(() => {
+      this.reportForm.reset();
+      this.router.navigate(['/report/list']);
+    });
   }
 
   openDialog() {
