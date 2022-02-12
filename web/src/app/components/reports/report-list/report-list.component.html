@@ -2,20 +2,27 @@
     No hay ningún reporte
 </div>
 <ng-template #foundReports>
-    <div class="report-list">
-        <div *ngFor="let item of reports$ | async" class="report-card">
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title>Área: {{item.type}}</mat-card-title>
-                    <mat-card-subtitle>{{item.description}}</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                    Reporte: {{item.text}}
-                </mat-card-content>
-                <mat-card-footer>
-                    Quien reportó: {{item.createdBy.name}}
-                </mat-card-footer>
-            </mat-card>
+    <div fxLayout="column">
+        <div class="refresh-button">
+            <button mat-icon-button color="primary" aria-label="Refresh reports" (click)="refetchData()">
+                <mat-icon>refresh</mat-icon>
+            </button>
+        </div>
+        <div class="report-list" fxLayout="row" fxLayoutAlign="space-around none">
+            <div *ngFor="let report of reports$ | async" class="report-card-list">
+                <mat-card (click)="openReportDialog(report)" class="report-card">
+                    <mat-card-header>
+                        <mat-card-title>{{report.type}}</mat-card-title>
+                        <mat-card-subtitle>{{report.description}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        Por: {{report.createdBy.name}}
+                    </mat-card-content>
+                    <mat-card-footer align="end">
+                        {{report.date | date:"dd-MM-yyyy"}}
+                    </mat-card-footer>
+                </mat-card>
+            </div>
         </div>
     </div>
 </ng-template>

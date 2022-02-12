@@ -14,12 +14,14 @@ export class UsersService {
 		private readonly usersRepository: Repository<Users>
 	) {}
 
-	public async findAll(usersArgs: UsersArgs): Promise<Users[]> {
+	public async findAll(usersArgs: UsersArgs, user: Users): Promise<Users[]> {
 		const { limit, offset } = usersArgs;
-		return this.usersRepository.find({
-			skip: offset,
-			take: limit,
-		});
+		return this.usersRepository
+			.find({
+				skip: offset,
+				take: limit,
+			})
+			.then((users) => users.filter((u) => u.id !== user.id));
 	}
 
 	public async findAllById(ids: string[]): Promise<Users[]> {

@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>{{(report$ | async)?.type}}</h1>
+<mat-dialog-content class="mat-typography">
+  <h2>Creado por: {{(report$ | async)?.createdBy?.name}}</h2>
+  <p>Fecha del reporte: {{((report$ | async)?.date | date:"dd-MM-yyyy")}}</p>
+  <p>Principal tarea: {{((report$ | async)?.description)}}</p>
+
+  <span *ngIf="(report$ | async)?.backupPeople?.length != 0">
+    <h2>Colaboradores</h2>
+    <h3 *ngFor="let user of (report$ | async)?.backupPeople">
+      {{user.name}}
+    </h3>
+  </span>
+  <h2>Reporte</h2>
+  <p>{{(report$ | async)?.text}}</p>
+
+  <h2>Fecha de creación</h2>
+  <p>Fecha del reporte: {{((report$ | async)?.created_date | date:"dd-MM-yyyy HH:MM")}}</p>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cerrar</button>
+</mat-dialog-actions>

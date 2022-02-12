@@ -13,8 +13,12 @@ export class UsersResolver {
 	constructor(private readonly usersService: UsersService) {}
 
 	@Query(() => [Users])
-	public async users(@Args() usersArgs: UsersArgs): Promise<Users[]> {
-		return this.usersService.findAll(usersArgs);
+	@UseGuards(GqlAuthGuard)
+	public async users(
+		@Args() usersArgs: UsersArgs,
+		@CurrentUser() user: Users
+	): Promise<Users[]> {
+		return this.usersService.findAll(usersArgs, user);
 	}
 
 	@Query(() => Users)

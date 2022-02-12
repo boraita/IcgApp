@@ -14,19 +14,22 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
+import { UserService } from '@shared/services/user.service';
 import { SharedModule } from '../../shared/shared.module';
 import { NewReportComponent } from './new-report/new-report.component';
 import { RecomendedPointsDialogComponent } from './recomended-points/recomended-points-dialog.component';
 import { ReportListComponent } from './report-list/report-list.component';
 import { ReportRoutingModule } from './report-routing.module';
 import { ReportsService } from './reports.service';
-import { UserService } from '../../shared/services/user.service';
+import { ReportDialogComponent } from './report-dialog/report-dialog.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
     ReportListComponent,
     NewReportComponent,
     RecomendedPointsDialogComponent,
+    ReportDialogComponent,
   ],
   imports: [
     SharedModule,
@@ -44,6 +47,8 @@ import { UserService } from '../../shared/services/user.service';
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatDialogModule,
+    FlexLayoutModule,
   ],
   providers: [
     ReportsService,

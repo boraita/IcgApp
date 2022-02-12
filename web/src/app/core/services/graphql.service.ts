@@ -7,9 +7,13 @@ import { Observable } from 'rxjs';
 export class GraphqlService {
   constructor(private apollo: Apollo) {}
 
-  watchGraphql(queryDocument: any): Observable<ApolloQueryResult<any>> {
+  watchGraphql(
+    queryDocument: any,
+    variables?: {}
+  ): Observable<ApolloQueryResult<any>> {
     return this.apollo.watchQuery({
       query: queryDocument,
+      variables,
     }).valueChanges;
   }
 

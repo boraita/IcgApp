@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GraphqlService } from '@app/core/services/graphql.service';
 import { Area } from '@app/shared/models/area';
-import { Report } from '@shared/models/report';
 import { ApiResources } from '@core/config/api-resources';
 import { resolveApiPath } from '@core/resolvePath';
+import { Report } from '@shared/models/report';
 import { map, Observable } from 'rxjs';
 import { ReportQueries } from './report-queries';
 
@@ -24,6 +24,11 @@ export class ReportsService {
     return this.graphService
       .watchGraphql(ReportQueries.reportsInfo)
       .pipe(map((result: any) => result?.data?.getReports));
+  }
+  getReport(id: string): Observable<Report> {
+    return this.graphService
+      .watchGraphql(ReportQueries.getReport, { id })
+      .pipe(map((result: any) => result?.data?.getReport));
   }
   getAllAreas(): Observable<Area[]> {
     const path = resolveApiPath(ApiResources.ALL_AREAS);

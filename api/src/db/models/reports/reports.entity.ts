@@ -55,6 +55,6 @@ export class Reports {
 	created_date: Date;
 
 	@Field()
-	@CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
+	@CreateDateColumn({ nullable: true })
 	updated_date: Date;
 }
