@@ -27,7 +27,7 @@ export class Users {
 	username: string;
 
 	@Field()
-	@Column({ length: 60 })
+	@Column({ length: 90, nullable: true })
 	password: string;
 
 	@Field(() => Role)
