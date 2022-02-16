@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { RecomendedPointsDialogComponent } from '../recomended-points/recomended-points-dialog.component';
 import { ReportsService } from '../reports.service';
 import { Router } from '@angular/router';
+import { PathResources } from '../../../core/config/path-resources';
 
 @Component({
   selector: 'app-new-report',
@@ -52,7 +53,7 @@ export class NewReportComponent implements OnInit {
   onSubmit() {
     this.reportService.sendReport(this.reportForm.value).subscribe(() => {
       this.reportForm.reset();
-      this.router.navigate(['/report/list']);
+      this.router.navigate([PathResources.REPORT_LIST]);
     });
   }
 

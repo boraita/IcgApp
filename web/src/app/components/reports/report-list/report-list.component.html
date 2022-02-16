@@ -9,20 +9,23 @@
             </button>
         </div>
         <div class="report-list" fxLayout="row" fxLayoutAlign="space-around none">
-            <div *ngFor="let report of reports$ | async" class="report-card-list">
-                <mat-card (click)="openReportDialog(report)" class="report-card">
-                    <mat-card-header>
-                        <mat-card-title>{{report.type}}</mat-card-title>
-                        <mat-card-subtitle>{{report.description}}</mat-card-subtitle>
-                    </mat-card-header>
-                    <mat-card-content>
-                        Por: {{report.createdBy.name}}
-                    </mat-card-content>
-                    <mat-card-footer align="end">
-                        {{report.date | date:"dd-MM-yyyy"}}
-                    </mat-card-footer>
-                </mat-card>
-            </div>
+            <mat-spinner *ngIf="loading;else reportList"></mat-spinner>
+            <ng-template #reportList>
+                <div *ngFor="let report of reports$ | async" class="report-card-list">
+                    <mat-card (click)="openReportDialog(report)" class="report-card">
+                        <mat-card-header>
+                            <mat-card-title>{{report.type}}</mat-card-title>
+                            <mat-card-subtitle>{{report.description}}</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                            Por: {{report.createdBy.name}}
+                        </mat-card-content>
+                        <mat-card-footer align="end">
+                            {{report.date | date:"dd-MM-yyyy"}}
+                        </mat-card-footer>
+                    </mat-card>
+                </div>
+            </ng-template>
         </div>
     </div>
 </ng-template>

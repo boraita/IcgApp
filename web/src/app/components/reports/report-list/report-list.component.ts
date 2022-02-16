@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ReportBasic } from '@shared/models/report';
 import {
   BehaviorSubject,
   distinctUntilChanged,
   Observable,
   switchMapTo,
+  tap,
 } from 'rxjs';
-import { ReportBasic } from '@shared/models/report';
 import { ReportDialogComponent } from '../report-dialog/report-dialog.component';
 import { ReportsService } from '../reports.service';
 
@@ -18,16 +19,14 @@ import { ReportsService } from '../reports.service';
 export class ReportListComponent implements OnInit {
   reports$!: Observable<ReportBasic[]>;
   event$ = new BehaviorSubject(false);
+  loading: boolean = false;
   constructor(
     private reportService: ReportsService,
     public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
-    this.reports$ = this.event$.pipe(
-      distinctUntilChanged(),
-      switchMapTo(this.reportService.getAllReport())
-    );
+    this.loadReportList();
   }
 
   openReportDialog(item: ReportBasic) {
@@ -37,5 +36,16 @@ export class ReportListComponent implements OnInit {
   }
   refetchData() {
     this.event$.next(true);
+  }
+  private loadReportList() {
+    this.reports$ = this.event$.pipe(
+      distinctUntilChanged(),
+      tap(() => (this.loading = true)),
+      switchMapTo(
+        this.reportService
+          .getAllReport()
+          .pipe(tap(() => (this.loading = false)))
+      )
+    );
   }
 }

@@ -13,11 +13,9 @@ import { LoginService } from '../login.service';
 export class LoginFormComponent {
   form: FormGroup;
   public loginInvalid = false;
-  private formSubmitAttempt = false;
 
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute,
     private router: Router,
     private loginService: LoginService
   ) {
@@ -28,22 +26,19 @@ export class LoginFormComponent {
   }
   onSubmit(): void {
     this.loginInvalid = false;
-    this.formSubmitAttempt = false;
     if (this.form.valid) {
       const username = this.form.get('username')?.value;
       const password = this.form.get('password')?.value;
 
       this.loginService.login(username, password).subscribe({
         next: () => {
-          this.router.navigate([PathResources.HOME]);
+          this.router.navigate([PathResources.REPORT_LIST]);
         },
         error: (e: HttpErrorResponse) => {
           console.log('error login:', e.status);
           this.loginInvalid = true;
         },
       });
-    } else {
-      this.formSubmitAttempt = true;
     }
   }
 }

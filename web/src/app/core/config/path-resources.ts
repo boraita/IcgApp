@@ -7,4 +7,5 @@ export class PathResources {
 
   // Report
   static REPORT = 'report';
+  static REPORT_LIST = 'report/list';
 }
