@@ -4,6 +4,7 @@ import { GraphqlService } from '@app/core/services/graphql.service';
 import { Area } from '@app/shared/models/area';
 import { ApiResources } from '@core/config/api-resources';
 import { resolveApiPath } from '@core/resolvePath';
+import { ReportType } from '@shared/enums/report-type.enum';
 import { Report } from '@shared/models/report';
 import { map, Observable } from 'rxjs';
 import { ReportQueries } from './report-queries';
