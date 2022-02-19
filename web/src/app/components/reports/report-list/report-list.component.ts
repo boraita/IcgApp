@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ReportBasic } from '@shared/models/report';
 import {
   BehaviorSubject,
+  debounceTime,
   distinctUntilChanged,
+  filter,
+  map,
   Observable,
+  startWith,
   switchMapTo,
   tap,
 } from 'rxjs';
@@ -18,8 +23,12 @@ import { ReportsService } from '../reports.service';
 })
 export class ReportListComponent implements OnInit {
   reports$!: Observable<ReportBasic[]>;
-  event$ = new BehaviorSubject(false);
+  refreshReports$ = new BehaviorSubject(false);
+  reportDataSet!: ReportBasic[];
+  searchText = new FormControl('');
+  searchQuery$!: Observable<string>;
   loading: boolean = false;
+  searchResult$!: Observable<ReportBasic[]>;
   constructor(
     private reportService: ReportsService,
     public dialog: MatDialog
@@ -27,6 +36,7 @@ export class ReportListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadReportList();
+    this.initFilterCountryList();
   }
 
   openReportDialog(item: ReportBasic) {
@@ -34,18 +44,39 @@ export class ReportListComponent implements OnInit {
     dialogConfig.data = item;
     this.dialog.open(ReportDialogComponent, dialogConfig);
   }
-  refetchData() {
-    this.event$.next(true);
+  refreshData() {
+    this.refreshReports$.next(false);
   }
+
   private loadReportList() {
-    this.reports$ = this.event$.pipe(
-      distinctUntilChanged(),
-      tap(() => (this.loading = true)),
-      switchMapTo(
-        this.reportService
-          .getAllReport()
-          .pipe(tap(() => (this.loading = false)))
+    this.refreshReports$
+      .pipe(
+        tap(() => (this.loading = true)),
+        switchMapTo(
+          this.reportService.getAllReport().pipe(
+            tap((data) => (this.reportDataSet = data)),
+            tap(() => (this.loading = false))
+          )
+        )
       )
+      .subscribe();
+  }
+  private initFilterCountryList() {
+    this.searchQuery$ = this.searchText.valueChanges.pipe(
+      distinctUntilChanged(),
+      debounceTime(10),
+      startWith('')
+    );
+    this.searchResult$! = this.searchQuery$.pipe(
+      filter(() => !!this.reportDataSet),
+      map((query) => {
+        return this.reportDataSet.filter(
+          (report: ReportBasic) =>
+            report.type.toLowerCase().includes(query.toLowerCase()) ||
+            report.createdBy.name.toLowerCase().includes(query.toLowerCase()) ||
+            report.description.toLowerCase().includes(query.toLowerCase())
+        );
+      })
     );
   }
 }
