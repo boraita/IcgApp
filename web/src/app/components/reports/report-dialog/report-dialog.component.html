@@ -11,7 +11,7 @@
     </h3>
   </span>
   <h2>Reporte</h2>
-  <p>{{(report$ | async)?.text}}</p>
+  <div [innerHTML]="(report$ | async)?.text" class="text-style"></div>
 
   <h2>Fecha de creación</h2>
   <p>Fecha del reporte: {{((report$ | async)?.created_date | date:"dd-MM-yyyy HH:MM")}}</p>
