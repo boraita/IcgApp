@@ -27,7 +27,7 @@ export class LoginFormComponent {
   onSubmit(): void {
     this.loginInvalid = false;
     if (this.form.valid) {
-      const username = this.form.get('username')?.value;
+      const username = this.form.get('username')?.value.toLowerCase();
       const password = this.form.get('password')?.value;
 
       this.loginService.login(username, password).subscribe({
