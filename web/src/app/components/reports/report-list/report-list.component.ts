@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ReportBasic } from '@shared/models/report';
 import {
   BehaviorSubject,
+  combineLatest,
   debounceTime,
   distinctUntilChanged,
   filter,
@@ -24,7 +25,7 @@ import { ReportsService } from '../reports.service';
 export class ReportListComponent implements OnInit {
   reports$!: Observable<ReportBasic[]>;
   refreshReports$ = new BehaviorSubject(false);
-  reportDataSet!: ReportBasic[];
+  reportDataSet$ = new BehaviorSubject<ReportBasic[] | null>(null);
   searchText = new FormControl('');
   searchQuery$!: Observable<string>;
   loading: boolean = false;
@@ -45,7 +46,7 @@ export class ReportListComponent implements OnInit {
     this.dialog.open(ReportDialogComponent, dialogConfig);
   }
   refreshData() {
-    this.refreshReports$.next(false);
+    this.refreshReports$.next(true);
   }
 
   private loadReportList() {
@@ -54,29 +55,34 @@ export class ReportListComponent implements OnInit {
         tap(() => (this.loading = true)),
         switchMapTo(
           this.reportService.getAllReport().pipe(
-            tap((data) => (this.reportDataSet = data)),
-            tap(() => (this.loading = false))
+            filter(({ loading }) => !loading),
+            tap((response) => {
+              this.loading = response.loading;
+              this.reportDataSet$.next(response.data?.getReports);
+            })
           )
         )
       )
       .subscribe();
   }
   private initFilterCountryList() {
-    this.searchQuery$ = this.searchText.valueChanges.pipe(
+    this.searchResult$ = combineLatest([
+      this.reportDataSet$.asObservable(),
+      this.searchText.valueChanges.pipe(startWith('')),
+    ]).pipe(
       distinctUntilChanged(),
-      debounceTime(10),
-      startWith('')
-    );
-    this.searchResult$! = this.searchQuery$.pipe(
-      filter(() => !!this.reportDataSet),
-      map((query) => {
-        return this.reportDataSet.filter(
+      debounceTime(400),
+      filter(([data]) => !!data),
+      map(([reports, filter]) =>
+        reports!.filter(
           (report: ReportBasic) =>
-            report.type.toLowerCase().includes(query.toLowerCase()) ||
-            report.createdBy.name.toLowerCase().includes(query.toLowerCase()) ||
-            report.description.toLowerCase().includes(query.toLowerCase())
-        );
-      })
+            report.type.toLowerCase().includes(filter.toLowerCase()) ||
+            report.createdBy.name
+              .toLowerCase()
+              .includes(filter.toLowerCase()) ||
+            report.description.toLowerCase().includes(filter.toLowerCase())
+        )
+      )
     );
   }
 }
