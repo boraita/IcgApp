@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Report, ReportBasic } from '@shared/models/report';
+import { filter, map, Observable, tap } from 'rxjs';
 import { ReportsService } from '../reports.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-report-dialog',
@@ -18,8 +18,12 @@ export class ReportDialogComponent implements OnInit {
   ) {
     this.reportId = data.id;
   }
-
+  loading = true;
   ngOnInit() {
-    this.report$ = this.reportService.getReport(this.reportId);
+    this.report$ = this.reportService.getReport(this.reportId).pipe(
+      filter(({ loading }) => !loading),
+      tap(({ loading }) => (this.loading = loading)),
+      map(({ data }) => data.getReport)
+    );
   }
 }

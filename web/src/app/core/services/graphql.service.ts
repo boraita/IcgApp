@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApolloQueryResult, FetchResult } from '@apollo/client/core';
 import { Apollo } from 'apollo-angular';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Injectable()
 export class GraphqlService {
@@ -9,11 +9,13 @@ export class GraphqlService {
 
   watchGraphql(
     queryDocument: any,
-    variables?: {}
+    variables?: {},
+    fetchPolicy?: 'cache-and-network' | 'cache-first' | 'network-only'
   ): Observable<ApolloQueryResult<any>> {
     return this.apollo.watchQuery({
       query: queryDocument,
       variables,
+      fetchPolicy,
     }).valueChanges;
   }
 
