@@ -5,7 +5,7 @@ import { CurrentUser } from '../users/user.decorator';
 import { Users } from '../users/users.entity';
 import { UsersService } from '../users/users.service';
 import { CreateReportInput } from './create-report.dto';
-import { ReportStatus } from './enums/reports-status.enum';
+import { ReportStatus } from '@shared/enums/reports-status.enum';
 import { ReportArgs } from './report-args';
 import { Reports } from './reports.entity';
 import { ReportsService } from './reports.service';
