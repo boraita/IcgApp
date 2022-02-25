@@ -8,8 +8,8 @@ import {
 	PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Reports } from '../reports/reports.entity';
-import { Area } from './enums/areas.enum';
-import { Role } from './enums/roles.enum';
+import { Area } from '@shared/enums/areas.enum';
+import { Role } from '@shared/enums/roles.enum';
 
 @Entity()
 @ObjectType()

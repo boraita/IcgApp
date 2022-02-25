@@ -1,4 +1,4 @@
-import { Area } from '@db/models/users/enums/areas.enum';
+import { Area } from '@shared/enums/areas.enum';
 import { Controller, Get } from '@nestjs/common';
 
 @Controller()
