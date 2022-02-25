@@ -15,6 +15,16 @@ export class ReportQueries {
     }
   `;
 
+  static getAllreportType = gql`
+    {
+      getAllReportsTypes {
+        type
+        description
+        describedPoints
+      }
+    }
+  `;
+
   static createReport = gql`
     mutation createReport($report: CreateReportInput!) {
       createReport(createReportInput: $report) {
