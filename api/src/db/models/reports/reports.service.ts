@@ -2,11 +2,11 @@ import { Users } from '@db/models/users/users.entity';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Role } from '../users/enums/roles.enum';
+import { Role } from '@shared/enums/roles.enum';
 import { CreateReportInput } from './create-report.dto';
 import { ReportArgs } from './report-args';
 import { Reports } from './reports.entity';
-import { ReportStatus } from './enums/reports-status.enum';
+import { ReportStatus } from '@shared/enums/reports-status.enum';
 import { UpdateReportInput } from './update-report';
 
 @Injectable()
