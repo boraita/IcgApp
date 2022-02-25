@@ -1,5 +1,5 @@
 import { ReportStatus } from '../enums/report-status.enum';
-import { ReportType } from '../enums/report-type.enum';
+import { AreaType } from './report-type';
 import { User } from './user';
 
 export interface Report extends ReportBasic {
@@ -12,7 +12,7 @@ export interface Report extends ReportBasic {
 export interface ReportBasic {
   id: string;
   createdBy: User;
-  type: ReportType;
+  type: AreaType;
   description: string;
   date: Date;
   status: ReportStatus;
