@@ -1,5 +1,5 @@
-import { ReportType } from '../enums/report-type.enum';
 import { Role } from '../enums/role.enum';
+import { AreaType } from './report-type';
 
 export interface User {
   id: string;
@@ -7,5 +7,5 @@ export interface User {
   username: string;
   email: string;
   roles: Role[];
-  collaboratorArea: ReportType;
+  collaboratorArea: AreaType;
 }

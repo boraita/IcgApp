@@ -2,16 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ReportType } from '@app/shared/enums/report-type.enum';
 import { PathResources } from '@core/config/path-resources';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ReportStatus } from '@shared/enums/report-status.enum';
+import { ReportType } from '@shared/models/report-type';
 import { User } from '@shared/models/user';
 import { UserService } from '@shared/services/user.service';
-import { Observable, tap } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { RecomendedPointsDialogComponent } from '../recomended-points/recomended-points-dialog.component';
 import { ReportsService } from '../reports.service';
-
-import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-new-report',
@@ -63,18 +62,10 @@ export class NewReportComponent implements OnInit {
   };
   DAYS_BEFORE_REPORT = 14;
   reportForm!: FormGroup;
-  topicSelected!: ReportType;
-  types!: ReportType[];
+  reportTypeSelected!: ReportType;
+  reportTypes$!: Observable<ReportType[]>;
   backupPeople$!: Observable<User[]>;
   minReportDate!: Date;
-  // TODO Hacer la llamada al servicio para obtener los puntos recomendados
-  recomendedPointWriting: any[] = [
-    'Base bíblica de la enseñanza',
-    'Objetivo de la enseñanza',
-    'Resumen de la enseñanza',
-    'Repaso y Memorización *Versículo y/o conceptos, significados a memorizar',
-    'Enfoque hacia su Identidad',
-  ];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -85,8 +76,9 @@ export class NewReportComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.buildForm();
-    // TODO Modificar por Areas
-    this.types = Object.values(ReportType);
+    this.reportTypes$ = this.reportService
+      .getAllReportsTypes()
+      .pipe(map(({ data }) => data?.getAllReportsTypes));
     this.backupPeople$ = this.userService.getAllUsers();
   }
 
@@ -104,15 +96,19 @@ export class NewReportComponent implements OnInit {
 
   openDialog() {
     this.dialog.open(RecomendedPointsDialogComponent, {
-      data: [...this.recomendedPointWriting],
+      data: [...this.reportTypeSelected.describedPoints],
     });
   }
+  selectReportType(reportType: ReportType) {
+    this.reportTypeSelected = reportType;
+  }
+
   private buildForm() {
     const today = new Date();
     this.minReportDate = today;
     this.minReportDate.setDate(today.getDate() - this.DAYS_BEFORE_REPORT);
     this.reportForm = this.formBuilder.group({
-      type: [ReportType.Kids, [Validators.required]],
+      type: [null, [Validators.required]],
       idsBackupPeople: [[]],
       description: [null, [Validators.required]],
       date: [today, [Validators.required]],

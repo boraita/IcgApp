@@ -8,8 +8,9 @@
                 <mat-form-field appearance="standard">
                     <mat-label>Tipo de reporte</mat-label>
                     <mat-select placeholder="Selecciona un tipo de reporte" formControlName="type">
-                        <mat-option *ngFor="let type of types" [value]="type">
-                            {{type}}
+                        <mat-option *ngFor="let itemType of (reportTypes$ | async)"
+                                    (click)="selectReportType(itemType)" [value]="itemType.type">
+                            {{itemType.type}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -36,13 +37,13 @@
                     <mat-error *ngIf="reportForm.hasError('matDatepickerMax')">La fecha no puede pasar 2 semanas para el
                         reporte</mat-error>
                 </mat-form-field>
-                <button mat-raised-button color="primary" (click)="openDialog()">Puntos a seguir</button>
+                <button mat-raised-button color="primary" (click)="openDialog()" [disabled]="!reportTypeSelected">Puntos
+                    a seguir</button>
             </div>
             <div class="report-text" fxLayout="column" fxLayoutGap="20px">
-                <div>
-                    Reporte de actitudes y comportamientos por niño (de forma resumida y concreta, especificar
-                    cosas que requieran atención inmediata).
-                </div>
+                <h3>
+                    {{reportTypeSelected?.description}}
+                </h3>
                 <angular-editor matInput formControlName="text" [config]="editorConfig"></angular-editor>
             </div>
         </form>
