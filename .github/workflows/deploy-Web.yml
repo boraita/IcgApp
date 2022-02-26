@@ -30,7 +30,7 @@ jobs:
           name: web-app
           path: web/dist
 
-  deployment-web-rpi:
+  deployment:
     runs-on: self-hosted
     needs: [build]
     steps:
