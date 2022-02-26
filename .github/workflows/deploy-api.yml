@@ -5,7 +5,7 @@ on:
     branches: [api-deploy]
 
 jobs:
-  build-backend:
+  build:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -28,7 +28,7 @@ jobs:
           name: api-app
           path: api/dist
 
-  deployment-api-rpi:
+  deployment:
     runs-on: self-hosted
     needs: [build]
     steps:
