@@ -1,19 +1,23 @@
 import { Users } from '@db/models/users/users.entity';
+import { MailService } from '@modules/mail/mail.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { ReportStatus } from '@shared/enums/reports-status.enum';
 import { Role } from '@shared/enums/roles.enum';
+import { Repository } from 'typeorm';
+import { UsersService } from '../users/users.service';
 import { CreateReportInput } from './create-report.dto';
 import { ReportArgs } from './report-args';
 import { Reports } from './reports.entity';
-import { ReportStatus } from '@shared/enums/reports-status.enum';
 import { UpdateReportInput } from './update-report';
 
 @Injectable()
 export class ReportsService {
 	constructor(
 		@InjectRepository(Reports)
-		private readonly reportsRepository: Repository<Reports>
+		private readonly reportsRepository: Repository<Reports>,
+		private readonly mailService: MailService,
+		private readonly userService: UsersService
 	) {}
 
 	public async findAll(
@@ -73,7 +77,14 @@ export class ReportsService {
 			createdBy: user,
 			status: ReportStatus.done,
 		};
-		return this.reportsRepository.save(createReportInput);
+		return this.reportsRepository
+			.save(createReportInput)
+			.then(async (report) => {
+				const usersAwareNewReport =
+					await this.userService.findAllToAwareNewReport(report);
+				this.sendEmil(report, usersAwareNewReport);
+				return report;
+			});
 	}
 
 	public async update(
@@ -93,5 +104,11 @@ export class ReportsService {
 		}
 
 		return this.reportsRepository.save(updateReportInput);
+	}
+
+	public async sendEmil(reports: Reports, users: Users[]): Promise<unknown> {
+		return this.mailService
+			.sendReportCreatedMail(users, reports)
+			.catch((err) => console.log(err));
 	}
 }
