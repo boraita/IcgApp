@@ -30,7 +30,7 @@ jobs:
 
   deployment-api:
     runs-on: self-hosted
-    needs: [build]
+    needs: [build-api]
     steps:
       - uses: actions/checkout@v2
       - name: Download build
