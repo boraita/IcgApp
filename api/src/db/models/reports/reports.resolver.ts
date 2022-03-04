@@ -23,7 +23,7 @@ export class ReportsResolver {
 		@Args() reportArgs: ReportArgs,
 		@CurrentUser() user: Users
 	): Promise<Reports[]> {
-		return await this.reportService.findAll(reportArgs, user);
+		return this.reportService.findAll(reportArgs, user);
 	}
 
 	@Query(() => Reports)
@@ -32,7 +32,7 @@ export class ReportsResolver {
 		@Args('id') id: string,
 		@CurrentUser() user: Users
 	): Promise<Reports> {
-		return await this.reportService.findOne(id, user);
+		return this.reportService.findOne(id, user);
 	}
 
 	@Mutation(() => Reports)
@@ -53,7 +53,7 @@ export class ReportsResolver {
 		@Args('id') id: string,
 		@Args('updateReportInput') updateReportInput: UpdateReportInput,
 		@CurrentUser() user: Users
-	): Promise<any> {
+	): Promise<Reports> {
 		updateReportInput = { ...updateReportInput, updated_date: new Date() };
 		return this.reportService.update(id, updateReportInput, user);
 	}

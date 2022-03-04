@@ -9,6 +9,9 @@ export class MailService {
 	constructor(private mailerService: MailerService) {}
 
 	public async sendReportCreatedMail(usersList: Users[], report: Reports) {
+		if (process.env.NODE_ENV !== 'prod') {
+			return;
+		}
 		const to = [];
 		const bcc = [];
 		usersList.forEach((user: Users) => {
