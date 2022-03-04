@@ -4,7 +4,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ReportStatus } from '@shared/enums/reports-status.enum';
 import { Role } from '@shared/enums/roles.enum';
-import { Repository } from 'typeorm';
+import { FindManyOptions, Repository } from 'typeorm';
 import { UsersService } from '../users/users.service';
 import { CreateReportInput } from './create-report.dto';
 import { ReportArgs } from './report-args';
@@ -29,7 +29,8 @@ export class ReportsService {
 			skip: offset,
 			take: limit,
 			relations: ['createdBy', 'backupPeople'],
-		};
+			order: { date: 'DESC' },
+		} as FindManyOptions<Reports>;
 		switch (user.roles) {
 			case Role.Collaborator:
 				parameters = {
