@@ -5,7 +5,7 @@ on:
     branches: [api/**, api-deploy]
 
 jobs:
-  build:
+  build-cloud-api:
     runs-on: ubuntu-latest
     defaults:
       run:

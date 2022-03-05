@@ -5,7 +5,7 @@ on:
     branches: [web-deploy]
 
 jobs:
-  build:
+  build-web:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -30,9 +30,9 @@ jobs:
           name: web-app
           path: web/dist
 
-  deployment:
+  deployment-web:
     runs-on: self-hosted
-    needs: [build]
+    needs: [build-web]
     steps:
       - uses: actions/checkout@v2
       - name: Download artifact

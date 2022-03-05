@@ -5,7 +5,7 @@ on:
     branches: [web/**, web-deploy]
 
 jobs:
-  build:
+  build-cloud-web:
     runs-on: ubuntu-latest
     defaults:
       run:
