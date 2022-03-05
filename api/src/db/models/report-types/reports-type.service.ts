@@ -12,15 +12,15 @@ export class ReportsTypeService {
 		private readonly reportTypeRepository: Repository<ReportsType>
 	) {}
 	public async findOne(id: string): Promise<ReportsType> {
-		return await this.reportTypeRepository.findOne(id);
+		return this.reportTypeRepository.findOne(id);
 	}
 	public async findAll(): Promise<ReportsType[]> {
-		return await this.reportTypeRepository.find();
+		return this.reportTypeRepository.find();
 	}
 	public async create(
 		reportType: CreateReportsTypeInput
 	): Promise<ReportsType> {
-		return await this.reportTypeRepository.save(reportType);
+		return this.reportTypeRepository.save(reportType);
 	}
 	public async update(
 		id: string,
