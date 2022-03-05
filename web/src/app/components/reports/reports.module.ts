@@ -20,7 +20,6 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { UserService } from '@shared/services/user.service';
 import { SharedModule } from '../../shared/shared.module';
 import { NewReportComponent } from './new-report/new-report.component';
-import { RecomendedPointsDialogComponent } from './recomended-points/recomended-points-dialog.component';
 import { ReportDialogComponent } from './report-dialog/report-dialog.component';
 import { ReportListComponent } from './report-list/report-list.component';
 import { ReportRoutingModule } from './report-routing.module';
@@ -30,7 +29,6 @@ import { ReportsService } from './reports.service';
   declarations: [
     ReportListComponent,
     NewReportComponent,
-    RecomendedPointsDialogComponent,
     ReportDialogComponent,
   ],
   imports: [

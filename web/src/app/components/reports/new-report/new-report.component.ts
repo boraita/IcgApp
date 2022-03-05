@@ -9,7 +9,6 @@ import { ReportType } from '@shared/models/report-type';
 import { User } from '@shared/models/user';
 import { UserService } from '@shared/services/user.service';
 import { map, Observable, tap } from 'rxjs';
-import { RecomendedPointsDialogComponent } from '../recomended-points/recomended-points-dialog.component';
 import { ReportsService } from '../reports.service';
 
 @Component({
@@ -21,18 +20,14 @@ export class NewReportComponent implements OnInit {
   editorConfig: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
-    height: '200px',
-    minHeight: '0',
+    height: 'auto',
+    minHeight: '200px',
     maxHeight: 'auto',
     width: 'auto',
     minWidth: '0',
     translate: 'yes',
     enableToolbar: true,
     showToolbar: true,
-    placeholder: 'Enter text here...',
-    defaultParagraphSeparator: '',
-    defaultFontName: '',
-    defaultFontSize: '',
     fonts: [
       { class: 'arial', name: 'Arial' },
       { class: 'times-new-roman', name: 'Times New Roman' },
@@ -54,8 +49,6 @@ export class NewReportComponent implements OnInit {
         tag: 'h1',
       },
     ],
-    uploadUrl: 'v1/image',
-    uploadWithCredentials: false,
     sanitize: true,
     toolbarPosition: 'top',
     toolbarHiddenButtons: [['bold', 'italic'], ['fontSize']],
@@ -94,13 +87,22 @@ export class NewReportComponent implements OnInit {
       .subscribe();
   }
 
-  openDialog() {
-    this.dialog.open(RecomendedPointsDialogComponent, {
-      data: [...this.reportTypeSelected.describedPoints],
-    });
-  }
   selectReportType(reportType: ReportType) {
     this.reportTypeSelected = reportType;
+    this.setTestPoints(reportType.describedPoints);
+  }
+  // Enrich the text to be easier to write the points
+  private setTestPoints(points: String[]) {
+    const enrichText = points
+      .map(
+        (point) =>
+          `<div class="mat-list-item-content"><b>${point}</b>
+          </div><div class="mat-list-item-content"><b><br></b>
+          </div><div class="mat-list-item-content"><b><br></b></div>`
+      )
+      .join()
+      .replaceAll('div>,', 'div>');
+    this.reportForm.get('text')?.setValue(enrichText);
   }
 
   private buildForm() {
