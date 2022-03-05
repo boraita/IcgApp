@@ -36,14 +36,24 @@ export class ReportsService {
 				parameters = {
 					...parameters,
 					...{
-						where: [{ createdBy: user }, { type: user.collaboratorArea }],
+						where: [
+							{ createdBy: user, status: ReportStatus.done },
+							{ type: user.collaboratorArea, status: ReportStatus.done },
+							{ createdBy: user, status: ReportStatus.working },
+							{ type: user.collaboratorArea, status: ReportStatus.working },
+						],
 					},
 				};
 				break;
 			case Role.User:
 				parameters = {
 					...parameters,
-					...{ where: { createdBy: user } },
+					...{
+						where: [
+							{ createdBy: user, status: ReportStatus.done },
+							{ createdBy: user, status: ReportStatus.working },
+						],
+					},
 				};
 				break;
 		}

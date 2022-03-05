@@ -27,20 +27,18 @@ export class UsersService {
 	}
 
 	public async findAllById(ids: string[]): Promise<Users[]> {
-		const users = await this.usersRepository.find({
+		return this.usersRepository.find({
 			where: { id: In(ids) },
 		});
-		return users;
 	}
 
 	public async findAllToAwareNewReport(report: Reports): Promise<Users[]> {
-		const users = await this.usersRepository.find({
+		return this.usersRepository.find({
 			where: [
 				{ collaboratorArea: report.type, roles: Role.Collaborator },
 				{ roles: Role.Admin },
 			],
 		});
-		return users;
 	}
 
 	public async findOneById(id: string): Promise<Users> {
