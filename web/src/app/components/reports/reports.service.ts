@@ -27,4 +27,7 @@ export class ReportsService {
   getAllReportsTypes(): Observable<ApolloQueryResult<any>> {
     return this.graphService.watchGraphql(ReportQueries.getAllreportType);
   }
+  generatePdf(id: string): Observable<ApolloQueryResult<any>> {
+    return this.graphService.watchGraphql(ReportQueries.generatePdf, { id });
+  }
 }
