@@ -37,8 +37,6 @@
                     <mat-error *ngIf="reportForm.hasError('matDatepickerMax')">La fecha no puede pasar 2 semanas para el
                         reporte</mat-error>
                 </mat-form-field>
-                <button mat-raised-button color="primary" (click)="openDialog()" [disabled]="!reportTypeSelected">Puntos
-                    a seguir</button>
             </div>
             <div class="report-text" fxLayout="column" fxLayoutGap="20px">
                 <h3>
