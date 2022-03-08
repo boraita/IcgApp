@@ -52,4 +52,9 @@ export class ReportQueries {
       }
     }
   `;
+  static generatePdf = gql`
+    query generatePdf($id: String!) {
+      text
+    }
+  `;
 }
