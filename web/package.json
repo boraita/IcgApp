@@ -1,6 +1,6 @@
 {
   "name": "icg-app",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "ng": "./node_modules/@angular/cli/bin/ng",
     "start": "ng serve",
