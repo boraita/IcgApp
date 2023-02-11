@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApolloQueryResult, FetchResult } from '@apollo/client/core';
-import { Apollo } from 'apollo-angular';
+import { Apollo, MutationResult } from 'apollo-angular';
 import { Observable, tap } from 'rxjs';
 
 @Injectable()
@@ -22,7 +22,7 @@ export class GraphqlService {
   mutateGraphql(
     queryDocument: any,
     variables: {}
-  ): Observable<FetchResult<any>> {
+  ): Observable<MutationResult<unknown>> {
     return this.apollo.mutate({
       mutation: queryDocument,
       variables,
