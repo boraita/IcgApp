@@ -16,14 +16,14 @@
     "importHelpers": true,
     "allowJs": true,
     "checkJs": false,
-    "target": "es2020",
+    "target": "ES2022",
     "module": "es2020",
     "lib": [
       "es2018",
       "es2017",
       "dom",
       "esnext",
-      "esnext.asynciterable",
+      "esnext.asynciterable"
     ],
     "paths": {
       "@core/*": [
@@ -40,8 +40,9 @@
       ],
       "@app/*": [
         "app/*"
-      ],
+      ]
     },
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
