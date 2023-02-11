@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { PathResources } from '@core/config/path-resources';
@@ -54,14 +54,14 @@ export class NewReportComponent implements OnInit {
     toolbarHiddenButtons: [['bold', 'italic'], ['fontSize']],
   };
   DAYS_BEFORE_REPORT = 14;
-  reportForm!: FormGroup;
+  reportForm!: UntypedFormGroup;
   reportTypeSelected!: ReportType;
   reportTypes$!: Observable<ReportType[]>;
   backupPeople$!: Observable<User[]>;
   minReportDate!: Date;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private reportService: ReportsService,
     private dialog: MatDialog,
     private userService: UserService,
