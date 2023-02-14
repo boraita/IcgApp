@@ -29,17 +29,17 @@
         </mat-form-field>
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Dia del reporte</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="date" [min]="minReportDate">
+          <input matInput [matDatepicker]="picker" formControlName="date" [max]="maxReportDate" [min]="minReportDate">
           <mat-datepicker-toggle matSuffix [for]="picker">
             <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
           </mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
-          <mat-error *ngIf="reportForm.hasError('matDatepickerMax')">La fecha no puede pasar 2 semanas para el
+          <mat-error *ngIf="reportForm.hasError('matDatepickerMax')">La fecha no puede pasar de 1 día para el
             reporte</mat-error>
         </mat-form-field>
       </div>
       <div class="report-text" fxLayout="column" fxLayoutGap="20px">
-        <h3>
+        <h3 *ngIf="reportTypeSelected">
           {{reportTypeSelected.description}}
         </h3>
         <angular-editor matInput formControlName="text" [config]="editorConfig"></angular-editor>
