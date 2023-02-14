@@ -11,6 +11,6 @@ export class UserService {
   getAllUsers(): Observable<User[]> {
     return this.graphService
       .watchGraphql(UserQueries.getAllUsers)
-      .pipe(map((result: any) => result?.data?.users));
+      .pipe(map((result: { data: { users: User[] } }) => result?.data?.users));
   }
 }

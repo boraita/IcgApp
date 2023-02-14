@@ -1,20 +1,20 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <mat-error *ngIf="loginInvalid">
-        Usuario y password incorrectos
+  <mat-error *ngIf="loginInvalid">
+    Usuario y Password incorrectos
+  </mat-error>
+  <mat-form-field>
+    <input matInput placeholder="Email" formControlName="username" required>
+    <mat-error>
+      Por favor ingrese un email válido
     </mat-error>
-    <mat-form-field class="full-width-input">
-        <input matInput placeholder="Email" formControlName="username" required>
-        <mat-error>
-            Por favor ingrese un email valido
-        </mat-error>
-    </mat-form-field>
-    <mat-form-field class="full-width-input">
-        <input matInput type="password" placeholder="Password" formControlName="password" required>
-        <mat-error>
-            Por favor ingrese un password valido
-        </mat-error>
-    </mat-form-field>
-    <div class="button">
-        <button mat-raised-button color="primary">Login</button>
-    </div>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <input matInput type="password" placeholder="Password" formControlName="password" required>
+    <mat-error>
+      Por favor ingrese un password válido
+    </mat-error>
+  </mat-form-field>
+  <div class="button">
+    <button mat-raised-button color="primary">Login</button>
+  </div>
 </form>

@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import { PathResources } from '@app/core/config/path-resources';
 import { MainComponent } from './main/main.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {

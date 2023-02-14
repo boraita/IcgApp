@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PathResources } from '@app/core/config/path-resources';
 import { LoginService } from '../login.service';
@@ -11,11 +11,11 @@ import { LoginService } from '../login.service';
   styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent {
-  form: FormGroup;
+  form: UntypedFormGroup;
   public loginInvalid = false;
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private router: Router,
     private loginService: LoginService
   ) {
