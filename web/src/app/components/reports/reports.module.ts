@@ -10,7 +10,10 @@ import {
 } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import {
+  MatFormFieldModule,
+  MAT_FORM_FIELD_DEFAULT_OPTIONS,
+} from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
@@ -18,7 +21,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { UserService } from '@shared/services/user.service';
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 import { NewReportComponent } from './new-report/new-report.component';
 import { ReportDialogComponent } from './report-dialog/report-dialog.component';
 import { ReportListComponent } from './report-list/report-list.component';
@@ -56,6 +59,10 @@ import { ReportsService } from './reports.service';
     ReportsService,
     UserService,
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'fill' },
+    },
   ],
 })
 export class ReportsModule {}

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ReportBasic } from '@shared/models/report';
 import {
@@ -26,7 +26,7 @@ export class ReportListComponent implements OnInit {
   reports$!: Observable<ReportBasic[]>;
   refreshReports$ = new BehaviorSubject(false);
   reportDataSet$ = new BehaviorSubject<ReportBasic[] | null>(null);
-  searchText = new FormControl('');
+  searchText = new UntypedFormControl('');
   searchQuery$!: Observable<string>;
   loading: boolean = false;
   searchResult$!: Observable<ReportBasic[]>;
