@@ -4,18 +4,23 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ReportBasic } from '@shared/models/report';
 import {
   BehaviorSubject,
+  catchError,
   combineLatest,
   debounceTime,
   distinctUntilChanged,
   filter,
   map,
   Observable,
+  of,
   startWith,
   switchMapTo,
   tap,
 } from 'rxjs';
 import { ReportDialogComponent } from '../report-dialog/report-dialog.component';
 import { ReportsService } from '../reports.service';
+import { setLogout } from '../../../core/persistence';
+import { PathResources } from '../../../core/config/path-resources';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-report-list',
@@ -32,6 +37,7 @@ export class ReportListComponent implements OnInit {
   searchResult$!: Observable<ReportBasic[]>;
   constructor(
     private reportService: ReportsService,
+    private route: Router,
     public dialog: MatDialog
   ) {}
 
@@ -59,6 +65,17 @@ export class ReportListComponent implements OnInit {
             tap((response) => {
               this.loading = response.loading;
               this.reportDataSet$.next(response.data?.getReports);
+            }),
+            catchError((err) => {
+              if (err.graphQLErrors) {
+                err.graphQLErrors.forEach((e: any) => {
+                  if (e.message === 'Unauthorized') {
+                    setLogout();
+                    this.route.navigate([PathResources.LOGIN]);
+                  }
+                });
+              }
+              return of([]);
             })
           )
         )
