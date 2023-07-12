@@ -10,11 +10,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    margin-top: 100px;
-    background-color: grey;
+    justify-content: space-between;
+    background-color: lightgray;
     img {
-      width: 100px;
+      width: 200px;
     }
   }
 }

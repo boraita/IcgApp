@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { PathResources } from '@core/config/path-resources';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
@@ -10,6 +13,7 @@ import { User } from '@shared/models/user';
 import { UserService } from '@shared/services/user.service';
 import { map, Observable, tap } from 'rxjs';
 import { ReportsService } from '../reports.service';
+import { editorConfig } from './angular-editor-config';
 
 @Component({
   selector: 'app-new-report',
@@ -17,53 +21,19 @@ import { ReportsService } from '../reports.service';
   styleUrls: ['./new-report.component.scss'],
 })
 export class NewReportComponent implements OnInit {
-  editorConfig: AngularEditorConfig = {
-    editable: true,
-    spellcheck: true,
-    height: 'auto',
-    minHeight: '200px',
-    maxHeight: 'auto',
-    width: 'auto',
-    minWidth: '0',
-    translate: 'yes',
-    enableToolbar: true,
-    showToolbar: true,
-    fonts: [
-      { class: 'arial', name: 'Arial' },
-      { class: 'times-new-roman', name: 'Times New Roman' },
-      { class: 'calibri', name: 'Calibri' },
-      { class: 'comic-sans-ms', name: 'Comic Sans MS' },
-    ],
-    customClasses: [
-      {
-        name: 'quote',
-        class: 'quote',
-      },
-      {
-        name: 'redText',
-        class: 'redText',
-      },
-      {
-        name: 'titleText',
-        class: 'titleText',
-        tag: 'h1',
-      },
-    ],
-    sanitize: true,
-    toolbarPosition: 'top',
-    toolbarHiddenButtons: [['bold', 'italic'], ['fontSize']],
-  };
-  DAYS_BEFORE_REPORT = 14;
-  reportForm!: FormGroup;
+  editorConfig: AngularEditorConfig = editorConfig;
+  DAYS_BEFORE_REPORT = 1;
+  DAYS_AFTER_REPORT = 2;
+  reportForm!: UntypedFormGroup;
   reportTypeSelected!: ReportType;
   reportTypes$!: Observable<ReportType[]>;
   backupPeople$!: Observable<User[]>;
   minReportDate!: Date;
+  maxReportDate!: Date;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private reportService: ReportsService,
-    private dialog: MatDialog,
     private userService: UserService,
     private router: Router
   ) {}
@@ -108,12 +78,13 @@ export class NewReportComponent implements OnInit {
   private buildForm() {
     const today = new Date();
     this.minReportDate = today;
+    this.maxReportDate = new Date();
     this.minReportDate.setDate(today.getDate() - this.DAYS_BEFORE_REPORT);
     this.reportForm = this.formBuilder.group({
       type: [null, [Validators.required]],
       idsBackupPeople: [[]],
       description: [null, [Validators.required]],
-      date: [today, [Validators.required]],
+      date: [today.getDate(), [Validators.required]],
       text: [null, Validators.required],
       status: [ReportStatus.done, Validators.required],
     });
