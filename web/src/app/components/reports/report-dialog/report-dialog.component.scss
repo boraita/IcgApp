@@ -1,0 +1,14 @@
+.text-style {
+  white-space: pre-wrap;
+}
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -50px;
+}
+mat-dialog-actions {
+  display: flex;
+  justify-content: space-between;
+}

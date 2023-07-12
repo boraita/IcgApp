@@ -1,6 +1,6 @@
 import { registerEnumType } from '@nestjs/graphql';
 export enum Area {
-	Kids = 'Ninos',
+	Kids = 'Kids',
 	Multimedia = 'Multimedia',
 	Youngs = 'Jovenes',
 	Prise = 'Alabanza',

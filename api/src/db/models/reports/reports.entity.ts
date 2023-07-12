@@ -10,8 +10,8 @@ import {
 	PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Users } from '../users/users.entity';
-import { Area } from '@db/models/users/enums/areas.enum';
-import { ReportStatus } from './enums/reports-status.enum';
+import { Area } from '@shared/enums/areas.enum';
+import { ReportStatus } from '@shared/enums/reports-status.enum';
 
 @Entity()
 @ObjectType()
@@ -55,6 +55,6 @@ export class Reports {
 	created_date: Date;
 
 	@Field()
-	@CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
+	@CreateDateColumn({ nullable: true })
 	updated_date: Date;
 }

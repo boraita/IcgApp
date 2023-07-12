@@ -1,8 +1,8 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { IsArray, IsDate, IsString } from 'class-validator';
 import { Users } from '../users/users.entity';
-import { Area } from '@db/models/users/enums/areas.enum';
-import { ReportStatus } from './enums/reports-status.enum';
+import { Area } from '@shared/enums/areas.enum';
+import { ReportStatus } from '@shared/enums/reports-status.enum';
 
 @InputType()
 export class CreateReportInput {

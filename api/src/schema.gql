@@ -2,6 +2,13 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type ReportsType {
+  id: ID!
+  type: String!
+  description: String!
+  describedPoints: [String!]!
+}
+
 type Reports {
   id: ID!
   createdBy: Users!
@@ -48,6 +55,9 @@ type Query {
   user(id: String!): Users!
   whoami: Users!
   getReports(offset: Int = 0, limit: Int = 25, createdBy: Int = -1): [Reports!]!
+  getReport(id: String!): Reports!
+  getReportsType(id: String!): ReportsType!
+  getAllReportsTypes: [ReportsType!]!
 }
 
 type Mutation {
@@ -57,6 +67,8 @@ type Mutation {
   createReport(createReportInput: CreateReportInput!): Reports!
   updateReport(updateReportInput: UpdateReportInput!, id: String!): Reports!
   removeReport(id: String!): Reports!
+  createReportsType(reportsType: CreateReportsTypeInput!): ReportsType!
+  updateReportsType(updateReportsType: UpdateReportsTypeInput!, id: String!): ReportsType!
 }
 
 input CreateUserInput {
@@ -90,4 +102,16 @@ input UpdateReportInput {
   status: String
   type: String
   updated_date: DateTime!
+}
+
+input CreateReportsTypeInput {
+  type: String!
+  describedPoints: [String!]
+  description: String!
+}
+
+input UpdateReportsTypeInput {
+  type: String
+  describedPoints: [String!]
+  description: String
 }

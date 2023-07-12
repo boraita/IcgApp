@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
 import { PathResources } from '@app/core/config/path-resources';
 import { MainComponent } from './main/main.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
@@ -27,8 +27,8 @@ const routes: Routes = [
             (m) => m.ReportsModule
           ),
       },
-      { path: '', redirectTo: PathResources.LOGIN, pathMatch: 'full' },
-      { path: '**', redirectTo: PathResources.LOGIN },
+      { path: '', redirectTo: PathResources.REPORT_LIST, pathMatch: 'full' },
+      { path: '**', redirectTo: PathResources.REPORT_LIST },
     ],
   },
 ];

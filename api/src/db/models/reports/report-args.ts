@@ -1,5 +1,5 @@
 import { ArgsType, Field, Int } from '@nestjs/graphql';
-import { Max, Min, IsString, IsInt } from 'class-validator';
+import { IsInt, Max, Min } from 'class-validator';
 
 @ArgsType()
 export class ReportArgs {

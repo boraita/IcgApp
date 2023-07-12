@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InMemoryCache } from '@apollo/client/core';
 import { ApiResources } from '@core/config/api-resources';
 import { resolveApiPath } from '@core/resolvePath';
-import { APOLLO_OPTIONS } from 'apollo-angular';
+import { ApolloModule, APOLLO_OPTIONS } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,6 +21,7 @@ function createApollo(httpLink: HttpLink) {
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    ApolloModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

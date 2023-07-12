@@ -1,7 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Role } from '@shared/enums/roles.enum';
 import * as bcrypt from 'bcrypt';
 import { In, Repository } from 'typeorm';
+import { Reports } from '../reports/reports.entity';
 import { CreateUserInput } from './create-user.dto';
 import { UpdateUserInput } from './update-user';
 import { UsersArgs } from './user-args';
@@ -14,19 +16,29 @@ export class UsersService {
 		private readonly usersRepository: Repository<Users>
 	) {}
 
-	public async findAll(usersArgs: UsersArgs): Promise<Users[]> {
+	public async findAll(usersArgs: UsersArgs, user: Users): Promise<Users[]> {
 		const { limit, offset } = usersArgs;
-		return this.usersRepository.find({
-			skip: offset,
-			take: limit,
-		});
+		return this.usersRepository
+			.find({
+				skip: offset,
+				take: limit,
+			})
+			.then((users) => users.filter((u) => u.id !== user.id));
 	}
 
 	public async findAllById(ids: string[]): Promise<Users[]> {
-		const users = await this.usersRepository.find({
+		return this.usersRepository.find({
 			where: { id: In(ids) },
 		});
-		return users;
+	}
+
+	public async findAllToAwareNewReport(report: Reports): Promise<Users[]> {
+		return this.usersRepository.find({
+			where: [
+				{ collaboratorArea: report.type, roles: Role.Collaborator },
+				{ roles: Role.Admin },
+			],
+		});
 	}
 
 	public async findOneById(id: string): Promise<Users> {

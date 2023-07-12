@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PathResources } from '@app/core/config/path-resources';
 import { LoginService } from '../login.service';
@@ -11,13 +11,11 @@ import { LoginService } from '../login.service';
   styleUrls: ['./login-form.component.scss'],
 })
 export class LoginFormComponent {
-  form: FormGroup;
+  form: UntypedFormGroup;
   public loginInvalid = false;
-  private formSubmitAttempt = false;
 
   constructor(
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
+    private fb: UntypedFormBuilder,
     private router: Router,
     private loginService: LoginService
   ) {
@@ -28,22 +26,19 @@ export class LoginFormComponent {
   }
   onSubmit(): void {
     this.loginInvalid = false;
-    this.formSubmitAttempt = false;
     if (this.form.valid) {
-      const username = this.form.get('username')?.value;
+      const username = this.form.get('username')?.value.toLowerCase();
       const password = this.form.get('password')?.value;
 
       this.loginService.login(username, password).subscribe({
         next: () => {
-          this.router.navigate([PathResources.HOME]);
+          this.router.navigate([PathResources.REPORT_LIST]);
         },
         error: (e: HttpErrorResponse) => {
           console.log('error login:', e.status);
           this.loginInvalid = true;
         },
       });
-    } else {
-      this.formSubmitAttempt = true;
     }
   }
 }

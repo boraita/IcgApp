@@ -18,7 +18,8 @@
     "titleBar.inactiveForeground": "#e7e7e799",
     "sash.hoverBorder": "#23345d",
     "statusBarItem.remoteBackground": "#151f38",
-    "statusBarItem.remoteForeground": "#e7e7e7"
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "commandCenter.border": "#e7e7e799"
   },
   "peacock.remoteColor": "#1857a4",
   "peacock.color": "#151f38",
